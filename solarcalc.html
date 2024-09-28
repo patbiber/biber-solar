@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solarrechner mit Google Solar API</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx1m_1YKUjk6_0vHmO4DYf_bI2eX-HGsU&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=APIKEY&libraries=places"></script>
     <script>
         function initAutocomplete() {
             const input = document.getElementById('address-input');
@@ -21,7 +21,7 @@
 
         function getSolarData(lat, lng) {
             // Beispiel-URL für die Solar API (du musst diese anpassen, je nach API-Spezifikation)
-            const url = `https://api.google.com/solar/v1/estimate?lat=${lat}&lng=${lng}&key=AIzaSyAx1m_1YKUjk6_0vHmO4DYf_bI2eX-HGsU`;
+            const url = `https://api.google.com/solar/v1/estimate?lat=${lat}&lng=${lng}&key=APIKEY`;
 
             fetch(url)
                 .then(response => response.json())
