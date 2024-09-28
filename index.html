@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Biber Solar</title>
+    <style>
+        body {
+            width: 95%; 
+            text-align: center; 
+            color: white;
+            font-family: Helvetica, Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: black;
+        }
+
+        #centerContainer {
+            max-width: 900px; 
+            text-align: left; 
+            margin: 0px auto; 
+        }
+
+        a {
+            color: rgb(1, 195, 1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            float: right;
+        }
+
+        .logo img {
+            width: 250px;
+        }
+
+        .products img {
+            width: 100%;
+        }
+
+        .cool-title {
+            font-family: 'Arial', sans-serif;
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(to right, #ffcc00, #3333ff);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .rechner {
+            background-color: #2e2e2e; /* Dark gray background to match the black theme */
+            border: 2px solid #ffc107; /* Yellow border to stand out */
+            border-radius: 10px; /* Rounded corners for a modern look */
+            padding: 20px; /* Space around the content */
+            margin: 20px auto; /* Center and give it some space */
+            max-width: 800px; /* Limit the width */
+            color: #ffffff; /* White text for readability */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for a lifted effect */
+        }
+
+        .rechner p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .rechner a {
+            color: #ffc107; /* Yellow for links inside the calculator box */
+            text-decoration: none;
+        }
+
+        .rechner a:hover {
+            text-decoration: underline;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .logo {
+                float: right;
+            }
+
+            .logo img {
+                width: 75px;
+            }
+
+            .cool-title {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="centerContainer">
+        <div class="logo"><img src="tree.png" alt="Biber Network IT Logo"/></div>
+
+        <h1 class="cool-title">Biber Solar</h1>
+        <h2>Werkzeugkasten</h2>
+        <p>Viel Spass beim Rechnen</p>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <div class="rechner"> 
+            <p>Diesen Rechner habe ich vor langer Zeit gemacht, er basiert auf den Grundlagen von Energieschweiz und meiner Erfahrung als Projektleiter als wir Oelheizungen mit Wärmepumpen ersetzt haben, ich würde es jetzt wohl nicht mehr mit php machen ;) 
+                <a href="https://github.com/patbiber/heat-pump-calculator" target="_blank">GitHub</a>
+            </p>        
+            <p><a href="https://biber.solar/heat-pump-calculator/">Starte Energie Rechner</a></p>
+            <a href="https://biber.solar/heat-pump-calculator/">
+                <img src="calculator.png" alt="Energierechner">
+            </a>
+        </div>
+
+        <h2>📧 <a href="mailto:contact@biber.solutions">contact@biber.solutions</a></h2>
+        <p>This website is hosted on an OVM VPS in Strasbourg, the Code is on GitHub: <a href="https://github.com/patbiber/biber-solar">Website Repository</a>.</p>
+
+        <footer><small> Patrick Biber | Hermann Hiltbrunner-Weg 24 | CH-8713 Uerikon </small></footer>
+    </div>
+</body>
+</html>
