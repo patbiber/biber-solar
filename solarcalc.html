@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solarrechner mit Google Solar API</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx1m_1YKUjk6_0vHmO4DYf_bI2eX-HGsU&libraries=places"></script>
+    <script>
+        function initAutocomplete() {
+            const input = document.getElementById('address-input');
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener('place_changed', function() {
+                const place = autocomplete.getPlace();
+                if (place.geometry) {
+                    const lat = place.geometry.location.lat();
+                    const lng = place.geometry.location.lng();
+                    getSolarData(lat, lng);
+                }
+            });
+        }
+
+        function getSolarData(lat, lng) {
+            // Beispiel-URL für die Solar API (du musst diese anpassen, je nach API-Spezifikation)
+            const url = `https://api.google.com/solar/v1/estimate?lat=${lat}&lng=${lng}&key=AIzaSyAx1m_1YKUjk6_0vHmO4DYf_bI2eX-HGsU`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const solarRadiation = data.solarRadiation; // Solareinstrahlung in kWh/m²
+                    const tariff = parseFloat(document.getElementById('tariff-input').value);
+                    
+                    if (!isNaN(tariff) && solarRadiation) {
+                        const annualSavings = solarRadiation * tariff; // Berechnung der jährlichen Einsparungen
+                        document.getElementById('output').textContent = 
+                            `Geschätzte jährliche Solareinstrahlung: ${solarRadiation} kWh/m². 
+                            Jährliche Einsparungen bei einem Tarif von ${tariff} €/kWh: ${annualSavings.toFixed(2)} €.`;
+                    } else {
+                        document.getElementById('output').textContent = 'Bitte geben Sie einen gültigen Stromtarif ein.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Fehler beim Abrufen der Solar-Daten:', error);
+                });
+        }
+    </script>
+</head>
+<body onload="initAutocomplete()">
+    <h1>Solarrechner</h1>
+    <p>Geben Sie eine Adresse ein, um die geschätzte jährliche Solareinstrahlung zu berechnen:</p>
+    <input id="address-input" type="text" placeholder="Adresse eingeben" style="width: 300px;"><br><br>
+
+    <p>Lokaler Stromtarif (in €/kWh):</p>
+    <input id="tariff-input" type="number" placeholder="Tarif eingeben" step="0.01" style="width: 150px;"><br><br>
+
+    <button onclick="initAutocomplete()">Berechnen</button><br><br>
+
+    <div id="output"></div>
+</body>
+</html>
