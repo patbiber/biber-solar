@@ -65,6 +65,18 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for a lifted effect */
         }
 
+        .tachion {
+            background-color: hsl(235, 29%, 85%); 
+            border: 2px solid #ffc107; /* Yellow border to stand out */
+            border-radius: 10px; /* Rounded corners for a modern look */
+            padding: 20px; /* Space around the content */
+            margin: 20px auto; /* Center and give it some space */
+            max-width: 800px; /* Limit the width */
+            color: #000000; /* White text for readability */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for a lifted effect */
+            width: 1260px
+        }
+
         .rechner p {
             margin: 10px 0;
             font-size: 16px;
@@ -77,47 +89,6 @@
 
         .rechner a:hover {
             text-decoration: underline;
-        }
-
-        #chatbot {
-            background-color: #333;
-            border: 2px solid #ffc107;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 800px;
-            color: #fff;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            text-align: left;
-        }
-
-        #chatbot-messages {
-            height: 600px;
-            overflow-y: auto;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #444;
-        }
-
-        #chatbot-input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            margin-bottom: 10px;
-        }
-
-        #chatbot-send {
-            padding: 10px 20px;
-            background-color: #ffc107;
-            border: none;
-            color: #000;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #chatbot-send:hover {
-            background-color: #ffda42;
         }
 
         @media only screen and (max-width: 600px) {
@@ -143,7 +114,6 @@
         <p>Diese Webseite ist im Aufbau.</p>
         <p>Kontaktiere mich gerne unter 📧 <a href="mailto:patrick@biber.solutions">patrick@biber.solutions</a> oder<a href="https://wa.link/jnpgdy" class="cta"><img style="width: 25px;" src="WhatsApp.svg" alt="Chat with WhatsApp"> WhatsApp</a>        
         <p>Viel Spass beim Rechnen.</p>
-
         <div class="rechner"> 
             <p>Diesen Rechner habe ich vor langer Zeit gemacht, er basiert auf den Grundlagen von Energieschweiz und meiner Erfahrung als Projektleiter als wir Oelheizungen mit Wärmepumpen ersetzt haben, ich würde es jetzt wohl nicht mehr mit php machen ;) 
                 <a href="https://github.com/patbiber/heat-pump-calculator" target="_blank">GitHub</a>
@@ -161,71 +131,6 @@
             <p><a href="https://solarcalc.biber.solar">Starte Solar Rechner</a></p>
         </div>
         <p><a href="https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/solarenergie.html">BfE Solarenergie</a></p>
-
-        <div id="chatbot">
-            Der Chatbot Beantwortet deine Fragen betreffend der Optimierung deines Gebäudes um Erneuerbare Energien zu nutzen.
-            <div id="chatbot-messages"></div>
-            <input id="chatbot-input" type="text" placeholder="Type your message..." />
-            <button id="chatbot-send">Send</button>
-        </div>
-
-        <script>
-        const chatbotMessages = document.getElementById('chatbot-messages');
-        const chatbotInput = document.getElementById('chatbot-input');
-        const chatbotSend = document.getElementById('chatbot-send');
-
-        // OpenAI API Key
-        const apiKey = 'sk-proj-eVmLarN8xmIhEaZUmIYkT3BlbkFJKUbsPK2FIk6rberiNWJn';
-
-        // Den optimierten Prompt als System-Nachricht festlegen
-        const systemPrompt = {
-            role: "system",
-            content: "Ich bin ein Solar- und Energie-Experte und beantworte deine Fragen zur Optimierung deines Gebäudes für erneuerbare Energien. Unser Ziel ist es, Kosten zu senken und unnötige CO₂-Emissionen zu vermeiden. Für weitere Informationen kannst du mich per E-Mail unter patrick@biber.solutions oder telefonisch unter 078 662 59 21 erreichen. Create a short answer."
-        };
-
-        async function getOpenAIResponse(message) {
-            const url = 'https://api.openai.com/v1/chat/completions';
-
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                    model: "gpt-3.5-turbo",  // oder "gpt-4" je nach Bedarf
-                    messages: [
-                        systemPrompt,  // Der optimierte Prompt als initiale System-Nachricht
-                        { role: "user", content: message }  // Benutzereingabe
-                    ],
-                    max_tokens: 800
-                })
-            });
-
-            const data = await response.json();
-            const aiMessage = data.choices[0].message.content;
-            return aiMessage;
-        }
-
-        chatbotSend.addEventListener('click', async function() {
-            const userInput = chatbotInput.value;
-            if (!userInput) return;
-
-            // Zeige die Nachricht des Benutzers
-            chatbotMessages.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
-            chatbotInput.value = '';
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-
-            // Hole die Antwort von OpenAI
-            try {
-                const aiResponse = await getOpenAIResponse(userInput);
-                chatbotMessages.innerHTML += `<p><strong>Chatbot:</strong> ${aiResponse}</p>`;
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            } catch (error) {
-                chatbotMessages.innerHTML += `<p><strong>Chatbot:</strong> Fehler: Verbindung zum Server fehlgeschlagen.</p>`;
-            }
-        });
-    </script>
   
         <p>This website is hosted on an OVH VPS in Strasbourg, the Code is on GitHub: <a href="https://github.com/patbiber/biber-solar">Website Repository</a>.</p>
 
