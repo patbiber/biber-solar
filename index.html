@@ -163,60 +163,40 @@
         <p><a href="https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/solarenergie.html">BfE Solarenergie</a></p>
 
         <div id="chatbot">
-            Der Chatbot Beantwortet deine Fragen betreffend der Optimierung deines Gebäudes um Erneuerbare Energien zu nutzen.
-            <div id="chatbot-messages"></div>
-            <input id="chatbot-input" type="text" placeholder="Type your message..." />
-            <button id="chatbot-send">Send</button>
-        </div>
+        <p>Der Chatbot beantwortet deine Fragen zur Optimierung deines Gebäudes für erneuerbare Energien.</p>
+        <div id="chatbot-messages"></div>
+        <input id="chatbot-input" type="text" placeholder="Gib deine Nachricht ein..." />
+        <button id="chatbot-send">Senden</button>
+    </div>
 
-        <script>
+    <script>
         const chatbotMessages = document.getElementById('chatbot-messages');
         const chatbotInput = document.getElementById('chatbot-input');
         const chatbotSend = document.getElementById('chatbot-send');
 
-        // OpenAI API Key
-      
-
-        // Den optimierten Prompt als System-Nachricht festlegen
-        const systemPrompt = {
-            role: "system",
-            content: "Ich bin ein Solar- und Energie-Experte und beantworte deine Fragen zur Optimierung deines Gebäudes für erneuerbare Energien. Unser Ziel ist es, Kosten zu senken und unnötige CO₂-Emissionen zu vermeiden. Für weitere Informationen kannst du mich per E-Mail unter patrick@biber.solutions oder telefonisch unter 078 662 59 21 erreichen. Create a short answer."
-        };
-
         async function getOpenAIResponse(message) {
-            const url = 'https://api.openai.com/v1/chat/completions';
-
-            const response = await fetch(url, {
+            // Anfrage an das Backend senden, nicht direkt an OpenAI
+            const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    model: "gpt-3.5-turbo",  // oder "gpt-4" je nach Bedarf
-                    messages: [
-                        systemPrompt,  // Der optimierte Prompt als initiale System-Nachricht
-                        { role: "user", content: message }  // Benutzereingabe
-                    ],
-                    max_tokens: 800
-                })
+                body: JSON.stringify({ message })
             });
-
             const data = await response.json();
-            const aiMessage = data.choices[0].message.content;
-            return aiMessage;
+            return data.message;
         }
 
         chatbotSend.addEventListener('click', async function() {
             const userInput = chatbotInput.value;
             if (!userInput) return;
 
-            // Zeige die Nachricht des Benutzers
-            chatbotMessages.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+            // Nachricht des Benutzers anzeigen
+            chatbotMessages.innerHTML += `<p><strong>Du:</strong> ${userInput}</p>`;
             chatbotInput.value = '';
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
-            // Hole die Antwort von OpenAI
+            // Antwort vom Backend (und damit von OpenAI) holen
             try {
                 const aiResponse = await getOpenAIResponse(userInput);
                 chatbotMessages.innerHTML += `<p><strong>Chatbot:</strong> ${aiResponse}</p>`;
