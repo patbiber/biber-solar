@@ -38,6 +38,14 @@
             width: 250px;
         }
 
+        .logo {
+            float: right;
+        }
+
+        .bot img {
+            width: 250px;
+        }
+
         .products img {
             width: 100%;
         }
@@ -92,7 +100,7 @@
         }
 
         #chatbot-messages {
-            height: 600px;
+            height: 300px;
             overflow-y: auto;
             margin-bottom: 10px;
             padding: 10px;
@@ -139,13 +147,90 @@
         <div class="logo"><img src="tree.png" alt="Biber Network IT Logo"/></div>
 
         <h1 class="cool-title">Biber Solar</h1>
+
         <h2>Solar- und Energierechner</h2>
-        <p>Diese Webseite ist im Aufbau.</p>
-        <p>Kontaktiere mich gerne unter 📧 <a href="mailto:patrick@biber.solutions">patrick@biber.solutions</a> oder<a href="https://wa.link/jnpgdy" class="cta"><img style="width: 25px;" src="WhatsApp.svg" alt="Chat with WhatsApp"> WhatsApp</a>        
-        <p>Viel Spass beim Rechnen.</p>
+
+        <section>
+        <h2>Nachhaltige Energielösungen für Dein Zuhause</h2>
+        <p>Als Solar-Installateur biete ich Dir maßgeschneiderte Lösungen für die Installation von Photovoltaikanlagen und Wärmepumpen. Ich helfe Dir, die Kraft der Sonne zu nutzen und Deine Energiekosten zu senken. Mit modernen, effizienten Systemen garantieren wir Dir höchste Qualität und Nachhaltigkeit – für eine grüne Zukunft und ein energieautarkes Zuhause.</p>
+        <p>Setze auf erneuerbare Energien und profitiere von attraktiven Fördermöglichkeiten. Gemeinsam finden wir die optimale Lösung für Deine Bedürfnisse!</p>
+
+           <p>Viel Spass beim Chatten und Rechnen.</p>
+
+           <div id="chatbot">
+        <p>Der Chatbot beantwortet deine Fragen zur Optimierung deines Gebäudes für erneuerbare Energien.</p>
+        <div id="chatbot-messages"></div>
+        <div class="bot"><img src="solarbot.png" alt="solarbot"/></div>
+        <input id="chatbot-input" type="text" placeholder="Möchtest du mit mir über Solar und Energie sprechen? Was möchtest du wissen?" />
+        <button id="chatbot-send">Senden</button>
+    </div>
+
+    <script>
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotSend = document.getElementById('chatbot-send');
+
+    // Überprüfen, ob bereits eine sessionId existiert, andernfalls erstellen
+    let sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+        sessionId = Date.now().toString(); // Eine eindeutige ID basierend auf der aktuellen Zeit
+        localStorage.setItem('sessionId', sessionId);
+    }
+
+    async function getOpenAIResponse(message) {
+        // Anfrage an das Backend senden, nicht direkt an OpenAI
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message, sessionId })  // Sende die sessionId mit
+        });
+        const data = await response.json();
+        return data.message;
+    }
+
+    // Ereignis für den "Senden"-Button
+    chatbotSend.addEventListener('click', async function() {
+        await sendMessage();
+    });
+
+    // Ereignis für die Enter-Taste
+    chatbotInput.addEventListener('keypress', async function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Verhindert das Standardverhalten (z.B. Zeilenumbruch)
+            await sendMessage();
+        }
+    });
+
+    // Funktion, die die Nachricht sendet
+    async function sendMessage() {
+        const userInput = chatbotInput.value;
+        if (!userInput) return;
+
+        // Nachricht des Benutzers anzeigen
+        chatbotMessages.innerHTML += `<p><strong>Du:</strong> ${userInput}</p>`;
+        chatbotInput.value = ''; // Eingabefeld leeren
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+        // Antwort vom Backend (und damit von OpenAI) holen
+        try {
+            const aiResponse = await getOpenAIResponse(userInput);
+            chatbotMessages.innerHTML += `<p><strong>Chatbot:</strong> ${aiResponse}</p>`;
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        } catch (error) {
+            chatbotMessages.innerHTML += `<p><strong>Chatbot:</strong> Fehler: Verbindung zum Server fehlgeschlagen.</p>`;
+        }
+    }
+</script>
+
+
+<p>Kontaktiere mich gerne unter 📧 <a href="mailto:patrick@biber.solutions">patrick@biber.solutions</a> oder<a href="https://wa.link/jnpgdy" class="cta"><img style="width: 25px;" src="WhatsApp.svg" alt="Chat with WhatsApp"> WhatsApp</a>        
+
+
 
         <div class="rechner"> 
-            <p>Diesen Rechner habe ich vor langer Zeit gemacht, er basiert auf den Grundlagen von Energieschweiz und meiner Erfahrung als Projektleiter als wir Oelheizungen mit Wärmepumpen ersetzt haben, ich würde es jetzt wohl nicht mehr mit php machen ;) 
+            <p>Diesen Rechner basiert auf den Grundlagen von Energieschweiz und meiner Erfahrung als Projektleiter als wir Oelheizungen mit Wärmepumpen ersetzt haben.
                 <a href="https://github.com/patbiber/heat-pump-calculator" target="_blank">GitHub</a>
             </p>        
             <p><a href="https://biber.solar/heat-pump-calculator/">Starte Energie Rechner</a></p>
@@ -153,50 +238,7 @@
                 <img src="calculator.png" alt="Energierechner">
             </a>
         </div>
-        <div id="chatbot">
-        <p>Der Chatbot beantwortet deine Fragen zur Optimierung deines Gebäudes für erneuerbare Energien.</p>
-        <div id="chatbot-messages"></div>
-        <input id="chatbot-input" type="text" placeholder="Gib deine Nachricht ein..." />
-        <button id="chatbot-send">Senden</button>
-    </div>
 
-    <script>
-        const chatbotMessages = document.getElementById('chatbot-messages');
-        const chatbotInput = document.getElementById('chatbot-input');
-        const chatbotSend = document.getElementById('chatbot-send');
-
-        async function getOpenAIResponse(message) {
-            // Anfrage an das Backend senden, nicht direkt an OpenAI
-            const response = await fetch('/api/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message })
-            });
-            const data = await response.json();
-            return data.message;
-        }
-
-        chatbotSend.addEventListener('click', async function() {
-            const userInput = chatbotInput.value;
-            if (!userInput) return;
-
-            // Nachricht des Benutzers anzeigen
-            chatbotMessages.innerHTML += `<p><strong>Du:</strong> ${userInput}</p>`;
-            chatbotInput.value = '';
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-
-            // Antwort vom Backend (und damit von OpenAI) holen
-            try {
-                const aiResponse = await getOpenAIResponse(userInput);
-                chatbotMessages.innerHTML += `<p><strong>Chatbot:</strong> ${aiResponse}</p>`;
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            } catch (error) {
-                chatbotMessages.innerHTML += `<p><strong>Chatbot:</strong> Fehler: Verbindung zum Server fehlgeschlagen.</p>`;
-            }
-        });
-    </script>
 
         <h3>Linklist</h3>
 
