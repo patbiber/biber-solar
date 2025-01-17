@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schweizer Geo-Adresssuche</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        h2 { color: #333; }
+        input, button { padding: 10px; margin: 5px 0; font-size: 16px; }
+        input { width: 300px; }
+        button { background-color: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        .autocomplete-list { position: absolute; background: white; border: 1px solid #ccc; max-width: 300px; z-index: 1000; }
+        .autocomplete-list div { padding: 8px; cursor: pointer; }
+        .autocomplete-list div:hover { background-color: #ddd; }
+        .map-section { margin-top: 20px; padding: 10px; background: white; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        iframe { width: 100%; height: 500px; border: 0; }
+        a { display: block; margin-top: 5px; color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+    <script>
+        // **Präzise Helmert-Transformation WGS84 → LV95**
+        function wgs84ToLv95(lon, lat) {
+            let phi = lat * Math.PI / 180;  // Latitude in Radians
+            let lambda = lon * Math.PI / 180; // Longitude in Radians
+
+            let lambda0 = 7.439583333 * Math.PI / 180; // Bern Meridian
+            let phi0 = 46.952405555 * Math.PI / 180;
+
+            let lonDiff = (lambda - lambda0) * 180 / Math.PI * 3600;
+            let latDiff = (phi - phi0) * 180 / Math.PI * 3600;
+
+            let y = 1200000 + (latDiff * 100) - (lonDiff * 0.1);
+            let x = 2600000 + (lonDiff * 100) + (latDiff * 0.1);
+
+            return { x: Math.round(x), y: Math.round(y) };
+        }
+
+        function searchAddress() {
+            let address = document.getElementById("addressInput").value;
+            let apiUrl = `https://api3.geo.admin.ch/rest/services/api/SearchServer?searchText=${encodeURIComponent(address)}&type=locations&limit=1`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.results.length > 0) {
+                        let result = data.results[0];
+                        let lon = parseFloat(result.attrs.lon);
+                        let lat = parseFloat(result.attrs.lat);
+                        let lv95 = wgs84ToLv95(lon, lat);
+
+                        document.getElementById("coordinates").innerText = `Koordinaten: X=${lv95.x}, Y=${lv95.y}`;
+
+                        let katasterURL = `https://geo.zh.ch/maps?x=${lv95.x}&y=${lv95.y}&scale=750&initialMapIds=KatasterplanZH`;
+                        let orthoURL = `https://geo.zh.ch/maps?x=${lv95.x}&y=${lv95.y}&scale=750&initialMapIds=Ortho22ZH`;
+                        let solarURL = `https://map.geo.admin.ch/?zoom=13&layers=ch.bfe.solarenergie-eignung-daecher&bgLayer=ch.swisstopo.swissimage&widgets=feedback&X=${lv95.x}&Y=${lv95.y}&lang=de`;
+
+                        document.getElementById("katasterLink").href = katasterURL;
+                        document.getElementById("photoLink").href = orthoURL;
+                        document.getElementById("solarLink").href = solarURL;
+
+                        document.getElementById("katasterFrame").src = katasterURL;
+                        document.getElementById("photoFrame").src = orthoURL;
+                        document.getElementById("solarFrame").src = solarURL;
+                    } else {
+                        alert("Adresse nicht gefunden! Bitte eine gültige Adresse in der Schweiz eingeben.");
+                    }
+                })
+                .catch(error => console.error("Fehler bei der Adresssuche:", error));
+        }
+
+        function autocompleteAddress() {
+            let input = document.getElementById("addressInput").value;
+            if (input.length < 3) return;
+
+            let apiUrl = `https://api3.geo.admin.ch/rest/services/api/SearchServer?searchText=${encodeURIComponent(input)}&type=locations&limit=5`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    let dropdown = document.getElementById("autocompleteList");
+                    dropdown.innerHTML = "";
+
+                    data.results.forEach(result => {
+                        let option = document.createElement("div");
+                        option.innerText = result.attrs.label;
+                        option.onclick = function() {
+                            document.getElementById("addressInput").value = result.attrs.label;
+                            dropdown.innerHTML = "";
+                            searchAddress();
+                        };
+                        dropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error("Fehler bei der Autovervollständigung:", error));
+        }
+    </script>
+</head>
+<body>
+    <h2>Schweizer Geo-Adresssuche</h2>
+    <input type="text" id="addressInput" placeholder="Adresse eingeben (z.B. Bahnhofstrasse 1, Zürich)" onkeyup="autocompleteAddress()">
+    <button onclick="searchAddress()">Suchen</button>
+    <div id="autocompleteList" class="autocomplete-list"></div>
+
+    <p id="coordinates">Koordinaten: (Noch keine Adresse ausgewählt)</p>
+
+    <div class="map-section"><h3>Katasterkarte</h3><iframe id="katasterFrame"></iframe></div>
+    <div class="map-section"><h3>Orthofoto</h3><iframe id="photoFrame"></iframe></div>
+    <div class="map-section"><h3>Solarpotenzial</h3><iframe id="solarFrame"></iframe></div>
+</body>
+</html>

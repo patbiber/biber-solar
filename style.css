@@ -1,0 +1,141 @@
+
+body {
+    width: 95%; 
+    text-align: center; 
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+    background-color: black;
+}
+
+#centerContainer {
+    max-width: 900px; 
+    text-align: left; 
+    margin: 0px auto; 
+}
+
+a {
+    color: rgb(1, 195, 1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    float: right;
+}
+
+.logo img {
+    width: 250px;
+}
+
+.logo {
+    float: right;
+}
+
+.bot img {
+    width: 250px;
+}
+
+.products img {
+    width: 100%;
+}
+
+.cool-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    background: linear-gradient(to right, #ffcc00, #3333ff);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.rechner {
+    background-color: #2e2e2e; /* Dark gray background to match the black theme */
+    border: 2px solid #ffc107; /* Yellow border to stand out */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    padding: 20px; /* Space around the content */
+    margin: 20px auto; /* Center and give it some space */
+    max-width: 800px; /* Limit the width */
+    color: #ffffff; /* White text for readability */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for a lifted effect */
+}
+
+.rechner p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.rechner a {
+    color: #ffc107; /* Yellow for links inside the calculator box */
+    text-decoration: none;
+}
+
+.rechner a:hover {
+    text-decoration: underline;
+}
+
+#chatbot {
+    background-color: #333;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: left;
+}
+
+#chatbot-messages {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #444;
+}
+
+#chatbot-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+}
+
+#chatbot-send {
+    padding: 10px 20px;
+    background-color: #ffc107;
+    border: none;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#chatbot-send:hover {
+    background-color: #ffda42;
+}
+
+@media only screen and (max-width: 700px) {
+    .logo {
+        float: right;
+    }
+
+    .logo img {
+        width: 75px;
+    }
+
+    .cool-title {
+        font-size: 36px;
+    }
+
+    #chatbot-input {
+    font-size: 25px;
+}
