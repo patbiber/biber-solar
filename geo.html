@@ -15,24 +15,30 @@
         .autocomplete-list div { padding: 8px; cursor: pointer; }
         .autocomplete-list div:hover { background-color: #ddd; }
         .map-section { margin-top: 20px; padding: 10px; background: white; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-        iframe { width: 100%; height: 500px; border: 0; }
+        iframe { width: 100%; height: 500px; border: 0; display: none; }
         a { display: block; margin-top: 5px; color: #007bff; text-decoration: none; }
         a:hover { text-decoration: underline; }
     </style>
     <script>
-        // **Präzise Helmert-Transformation WGS84 → LV95**
         function wgs84ToLv95(lon, lat) {
-            let phi = lat * Math.PI / 180;  // Latitude in Radians
-            let lambda = lon * Math.PI / 180; // Longitude in Radians
+            let a = 6378137.0;
+            let f = 1 / 298.257223563;
+            let b = a * (1 - f);
 
-            let lambda0 = 7.439583333 * Math.PI / 180; // Bern Meridian
+            let phi = lat * Math.PI / 180;
+            let lambda = lon * Math.PI / 180;
+
             let phi0 = 46.952405555 * Math.PI / 180;
+            let lambda0 = 7.439583333 * Math.PI / 180;
 
-            let lonDiff = (lambda - lambda0) * 180 / Math.PI * 3600;
-            let latDiff = (phi - phi0) * 180 / Math.PI * 3600;
+            let e2 = (a * a - b * b) / (a * a);
+            let n = (a - b) / (a + b);
 
-            let y = 1200000 + (latDiff * 100) - (lonDiff * 0.1);
-            let x = 2600000 + (lonDiff * 100) + (latDiff * 0.1);
+            let deltaLambda = lambda - lambda0;
+            let deltaPhi = phi - phi0;
+
+            let x = 2600000 + (deltaLambda * 100000) + (deltaPhi * 10000);
+            let y = 1200000 + (deltaPhi * 100000) - (deltaLambda * 10000);
 
             return { x: Math.round(x), y: Math.round(y) };
         }
@@ -63,6 +69,10 @@
                         document.getElementById("katasterFrame").src = katasterURL;
                         document.getElementById("photoFrame").src = orthoURL;
                         document.getElementById("solarFrame").src = solarURL;
+
+                        document.getElementById("katasterFrame").style.display = "block";
+                        document.getElementById("photoFrame").style.display = "block";
+                        document.getElementById("solarFrame").style.display = "block";
                     } else {
                         alert("Adresse nicht gefunden! Bitte eine gültige Adresse in der Schweiz eingeben.");
                     }
@@ -105,8 +115,22 @@
 
     <p id="coordinates">Koordinaten: (Noch keine Adresse ausgewählt)</p>
 
-    <div class="map-section"><h3>Katasterkarte</h3><iframe id="katasterFrame"></iframe></div>
-    <div class="map-section"><h3>Orthofoto</h3><iframe id="photoFrame"></iframe></div>
-    <div class="map-section"><h3>Solarpotenzial</h3><iframe id="solarFrame"></iframe></div>
+    <div class="map-section">
+        <h3>Katasterkarte</h3>
+        <a id="katasterLink" href="#" target="_blank">Katasterkarte anzeigen</a>
+        <iframe id="katasterFrame"></iframe>
+    </div>
+
+    <div class="map-section">
+        <h3>Orthofoto</h3>
+        <a id="photoLink" href="#" target="_blank">Orthofoto anzeigen</a>
+        <iframe id="photoFrame"></iframe>
+    </div>
+
+    <div class="map-section">
+        <h3>Solarpotenzial</h3>
+        <a id="solarLink" href="#" target="_blank">Solarpotenzial anzeigen</a>
+        <iframe id="solarFrame"></iframe>
+    </div>
 </body>
 </html>
