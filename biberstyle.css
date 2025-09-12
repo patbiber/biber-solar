@@ -1,0 +1,277 @@
+
+body {
+    padding-top: 40px;
+    padding-bottom: 800px;
+    width: 95%; 
+    text-align: center; 
+    margin-bottom: 100px;
+    #centerContainer { max-width: 900px; text-align: left; margin: 0px auto; }
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+    background-color: black;
+}
+
+a {
+    color: rgb(1, 195, 1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-top: 30px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+ul li::before {
+    content: "🚀";
+    position: absolute;
+    left: 0;
+    color: white;
+}
+
+#chatbot {
+    background-color: #333;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: left;
+}
+
+#chatbot-messages {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #444;
+}
+
+#chatbot-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+}
+
+#chatbot-send {
+    padding: 10px 20px;
+    background-color: #ffc107;
+    border: none;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#chatbot-send:hover {
+    background-color: #ffda42;
+}
+
+.bot img {
+    width: 150px;
+}
+
+.cta {
+    font-size: 24px;
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 15px 15px;
+    border: 2px solid #ffcc00;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    line-height: 3;
+    margin-bottom: 50px;
+    margin-right: 25px;
+}
+
+.cta:hover {
+    background-color: #ffcc00;
+    color: #000;
+}
+
+.cta img {
+    width: 30px;
+}
+
+.products img {
+    width: 100%;
+}
+
+.logo {
+    float: right;
+}
+.logo img {
+        max-width:250px;
+}
+
+.photo {
+    float: right;
+}
+.photo img {
+        max-width:400px;
+}
+
+.cool-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 52px;
+    font-weight: bold;
+    background: linear-gradient(to right, #ffcc00, #3333ff);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-align: center;
+    margin: 30px 0 15px 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.by-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 30px;
+    font-weight: lighter;
+    background: linear-gradient(to right, #ffcc00, #3333ff);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-align: center;
+    margin: 0 0 75px 140px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+video {
+    width: 100%;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#asciiBeaver {
+    font-family: "Courier New", monospace;
+    white-space: pre;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: bold;
+    color: green;
+}   
+
+header { 
+    padding: 0;
+    position: fixed; /* Make header always visible */
+    top: 0;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 14, 119, 0.8); /* Semi-transparent background */
+    z-index: 1; /* Ensures header stays above other content */
+  }
+ 
+  nav ul.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    display: flex;
+    justify-content: center; /* Center the links horizontally */
+  }
+
+  nav ul.menu a { 
+    display: inline-block;
+    font-weight: bold;
+    margin: 10px 20px 10px 20px; /* Space out the links */
+    color: white; 
+    text-decoration: blueviolet; 
+    padding: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+  }
+  nav ul.menu a:hover {
+    background-color: rgb(11, 133, 70); 
+    border-radius: 5px;
+  }
+
+  #hamburger-btn {
+    border: none;
+    font-size: 1px;
+    background: none;
+  }
+
+@media only screen and (max-width: 700px) {
+    .logo {
+        float: right;
+    }
+    .logo img {
+        width:75px;
+    }
+    .cool-title {
+        font-size: 36px;
+    }
+
+    #chatbot-input {
+    font-size: 25px;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%; /* Full-width nav menu */
+        display: none; /* Hide the nav by default */
+        margin-right: 0;
+        }
+    
+        nav ul {
+        flex-direction: column;
+        align-items: center;
+        }
+        
+        nav a {
+        display: block; /* Make links block-level for better touch targets */
+        margin: 10px 0; /* Spacing between links */
+        }
+    
+        #hamburger-btn {
+        display: block; /* Show hamburger menu */
+        background: none;
+        border: none;
+        color: white;
+        font-size: 3rem;
+        cursor: pointer;
+        margin-right: 10px;
+        }
+    
+        header {
+        flex-wrap: wrap; /* Allow header items to wrap */
+        padding: 0.5rem; /* Reduce padding */
+        }
+    }

@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Biber Solar</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="biberstyle.css">
+
     <meta name="author" content="Patrick Biber">
     <link rel="icon" href="tree.png" type="image/png">
 </head>
@@ -11,24 +13,22 @@
     <div id="centerContainer">
         <div class="logo"><img src="tree.png" alt="Biber Network IT Logo"/></div>
 
-        <h1 class="cool-title">Biber Solar</h1>
+        <h1 class="cool-title">Biber.Solar</h1>
 
-        <h2>Solar- und Energierechner</h2>
-
-        <section>
-        <h2>Nachhaltige Energielösungen für Dein Zuhause</h2>
-        <p>Als Solar-Installateur biete ich Dir maßgeschneiderte Lösungen für die Installation von Photovoltaikanlagen und Wärmepumpen. Ich helfe Dir, die Kraft der Sonne zu nutzen und Deine Energiekosten zu senken. Mit modernen, effizienten Systemen garantieren wir Dir höchste Qualität und Nachhaltigkeit – für eine grüne Zukunft und ein energieautarkes Zuhause.</p>
-        <p>Setze auf erneuerbare Energien und profitiere von attraktiven Fördermöglichkeiten. Gemeinsam finden wir die optimale Lösung für Deine Bedürfnisse!</p>
-
-           <p>Viel Spass beim Chatten und Rechnen.</p>
-
-           <div id="chatbot">
+        <section id="intro">
+            <h2>Güezi, ich bin Patrick Biber</h2>
+                <p>Ich wohne in <a href="https://maps.app.goo.gl/Lc8ba38D4BDmgA6A6" target="_blank">Uerikon am Zürichsee in der Schweiz.</a></p>
+                <p>Angestellt bei <a href=https://ch.linkedin.com/in/patrick-biber> <b>eConnect</b></a> als Berater für Photovoltaik Systeme und energetische Sanierungen.</p>
+                <p>Hier sammle ich Kurznotizen, Links und Projekte zu Solar, Computer, IT und Linux.</p>
+         </section>
+        
+        <div id="chatbot">
         <p>Der Chatbot beantwortet deine Fragen zur Optimierung deines Gebäudes für erneuerbare Energien.</p>
         <div id="chatbot-messages"></div>
         <div class="bot"><img src="solarbot.png" alt="solarbot"/></div>
         <input id="chatbot-input" type="text" placeholder="Möchtest du mit mir über Solar und Energie sprechen? Was möchtest du wissen?" />
         <button id="chatbot-send">Senden</button>
-    </div>
+        </div>
 
     <script>
     const chatbotMessages = document.getElementById('chatbot-messages');
@@ -88,27 +88,11 @@
         }
     }
 </script>
+    <section id="links"></section>
 
+        <h2>Linklist</h2>
 
-<p>Kontaktiere mich gerne unter 📧 <a href="mailto:patrick@biber.solutions">patrick@biber.solutions</a> oder<a href="https://wa.link/jnpgdy" class="cta"><img style="width: 25px;" src="WhatsApp.svg" alt="Chat with WhatsApp"> WhatsApp</a>        
-
-
-
-        <div class="rechner"> 
-            <p>Diesen Rechner basiert auf den Grundlagen von Energieschweiz und meiner Erfahrung als Projektleiter als wir Oelheizungen mit Wärmepumpen ersetzt haben.
-                <a href="https://github.com/patbiber/heat-pump-calculator" target="_blank">GitHub</a>
-            </p>        
-            <p><a href="https://biber.solar/heat-pump-calculator/">Starte Energie Rechner</a></p>
-            <a href="https://biber.solar/heat-pump-calculator/">
-                <img src="calculator.png" alt="Energierechner">
-            </a>
-        </div>
-
-
-        <h3>Linklist</h3>
-
-
-        <p><a href="https://github.com/patbiber/solartech/blob/main/basics.md">Meine Elektrotechnik Formeln und Basics auf GitHub</a></p>
+        <p><a href="https://github.com/patbiber/solartech/blob/main/basics.md">Meine Solarteur Formeln PV, ST, WP, Elektrotechnik, Wärmelehre auf GitHub</a></p>
 
         <p><a href="https://pronovo.ch/de/services/tarifrechner/">Berechnen Sie bei Pronovo Ihren Förderbetrag / Vergütungssatz des Bundes Ihrer neuen Solar Anlage</a></p>
 
@@ -117,24 +101,41 @@
         <p><a href="https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis_en">European Commission / Photovoltaic Geographical Information System (PVGIS)</a></p>
 
         <p><a href="https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/solarenergie.html">BfE Solarenergie</a></p>
-  
-
-        <iframe id='sonnendachCH' width='850' height='600' src='//www.uvek-gis.admin.ch/BFE/sonnendach/loader.html?E=2660300&N=1190000&zoom=1&lang=de' style='outline: none; border: 0;' frameborder='0'></iframe>
-
 
         <p><a href="https://geo.zh.ch/maps?x=2695346&y=1234249&scale=220&basemap=arelkbackgroundzh">GIS ZH Kataster </a></p>
 
         <p><a href="https://geo.zh.ch/maps?x=2695346&y=1234249&scale=150&initialMapIds=Ortho22ZH">GIS ZH Kataster Photo</a></p>
 
         <p><a href="https://map.geo.admin.ch/?zoom=13&layers=ch.bfe.solarenergie-eignung-daecher&bgLayer=ch.swisstopo.swissimage&widgets=feedback&X=232542&Y=709159&lang=de">GIS Swiss Solar</a></p>
+ 
+        <h2>Solar Potential</h2>
 
-        <p>This website is hosted on an OVH VPS in Strasbourg, the Code is on GitHub: <a href="https://github.com/patbiber/biber-solar">Website Repository</a>.</p>
+        <iframe id='sonnendachCH' width='850' height='600' src='//www.uvek-gis.admin.ch/BFE/sonnendach/loader.html?E=2660300&N=1190000&zoom=1&lang=de' style='outline: none; border: 0;' frameborder='0'></iframe>
 
-        <p>This Service is brought to you by <a href="https://biber.solutions">biber.solutions</a></p>
+    </section>
 
-        <p><b>Disclaimer: </b> We do not take responsibility for any AI-generated content provided through OpenAI's services. The information and responses generated by the AI are for informational purposes only and should not be considered as professional or legally binding advice. Users should verify any information independently before acting upon it.</p>
+    <section id="contact">
+        <h2>Ich freue mich jederzeit auf deinen Kontakt!</h2> 
+            <a href="tel:0041786625921" class="cta">📱 +41 78 662 59 21</a> <br>
+            <a href="mailto:contact@biber.solutions" class="cta">📧 contact@biber.solutions</a><br>
+            <a href="https://signal.me/#p/+41786625921" class="cta">💬 Signal</a>
+            <a href="https://wa.link/jnpgdy" class="cta"><img src="WhatsApp.svg" alt="Chat with WhatsApp"> WhatsApp</a> 
+            <a href="https://threema.id/FX8MF3J8" class="cta"><img src="app-icon-threema.svg" alt="Chat with Threema"> Threema</a><br>
+            <p>Du findest mich auch auf <a href=https://ch.linkedin.com/in/patrick-biber> <b>Linkedin</b></a>.</p>
+            <p>Hier ist mein <a href="paede_biber.pub" target="_blank">public SSH key</a>.</p>
+            <p>Mein Github user ist <a href="https://github.com/patbiber"target="_blank">patbiber</a>.</p>
+            <p><a href="Patrick Biber_biber@network-it.ch-0x7FB1B45AD93AD39D-pub.asc"target="_blank">PGP Key</a>.</p>
+            <p><a href="https://maps.app.goo.gl/Lc8ba38D4BDmgA6A6" target="_blank">Patrick Biber | Hermann Hiltbrunner-Weg 24 | CH-8713 Uerikon </a></p>
+    </section>
 
-        <footer><small> Patrick Biber | Hermann Hiltbrunner-Weg 24 | CH-8713 Uerikon </small></footer>
+        <footer>
+            <small> 
+                <p>This website is hosted on an OVH VPS in Strasbourg, the Code is on GitHub: <a href="https://github.com/patbiber/biber-solar">Website Repository</a>.
+                </p>
+                <p><b>Disclaimer: </b> We do not take responsibility for any AI-generated content provided through OpenAI's services. The information and responses generated by the AI are for informational purposes only and should not be considered as professional or legally binding advice. Users should verify any information independently before acting upon it.
+                </p>
+            </small>
+        </footer>
     </div>
 </body>
 </html>
