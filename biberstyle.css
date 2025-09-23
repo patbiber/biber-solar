@@ -154,16 +154,28 @@ ul li::before {
 }
 
 .cool-title {
-    font-family: 'Arial', sans-serif;
-    font-size: 52px;
-    font-weight: bold;
-    background: linear-gradient(to right, #44b805, #040e9e);
-    -webkit-background-clip: text;
-    color: transparent;
-    text-align: center;
-    margin: 30px 0 15px 0;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
+    $random-text: 'Biber.Solar';
+    position: relative;
+    text-transform: uppercase;
+    font-size: $extra-large;
+    font-family: 'Catamaran', sans-serif;
+    color: rgba(white, 0.8);
+    &:before {
+      position: absolute;
+      content: $random-text;
+      color: rgba($blue, 0.8);
+      top: 5px;
+      left: 10px;
+    }
+    &:after {
+      z-index: -1;
+      position: absolute;
+      content: $random-text;
+      color: rgba($red, 0.8);
+      top: -5px;
+      left: 8px;
+    }
+  }
 
 .by-title {
     font-family: 'Arial', sans-serif;
