@@ -30,7 +30,7 @@ body {
 }
 
 a {
-    color: rgb(1, 159, 195);
+    color: #0000ff;
 }
 
 h1 {
@@ -157,7 +157,7 @@ ul li::before {
     font-family: 'Arial', sans-serif;
     font-size: 52px;
     font-weight: bold;
-    background: linear-gradient(to right, #007bff, #fcff33);
+    background: linear-gradient(to right, #0000ff, #fcff33);
     -webkit-background-clip: text;
     color: transparent;
     text-align: center;
@@ -169,7 +169,7 @@ ul li::before {
     font-family: 'Arial', sans-serif;
     font-size: 30px;
     font-weight: lighter;
-    background: linear-gradient(to right, #ffcc00, #3333ff);
+    background: linear-gradient(to right, #ffcc00, #0000ff);
     -webkit-background-clip: text;
     color: transparent;
     text-align: center;
@@ -211,7 +211,7 @@ header {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    background-color: rgba(32, 185, 21, 0.8); /* Semi-transparent background */
+    background-color:#0000ff; /* Semi-transparent background */
     z-index: 1; /* Ensures header stays above other content */
   }
  
