@@ -157,7 +157,7 @@ ul li::before {
     font-family: 'Arial', sans-serif;
     font-size: 52px;
     font-weight: bold;
-    background: linear-gradient(to right, #0000ff, #fcff33);
+    background: linear-gradient(to right, #fbff00, #049e14);
     -webkit-background-clip: text;
     color: transparent;
     text-align: center;
