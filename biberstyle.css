@@ -1,294 +1,482 @@
+/* =========================================
+   biberstyle.css (Vollversion)
+   Fokus: Patrick im Zentrum, Logo als Hero-Wasserzeichen
+   Funktioniert mit deinem bestehenden HTML
+   ========================================= */
+
 :root{
-  --header-h: 72px;           /* Fallback – wird per JS dynamisch gesetzt */
-  scroll-padding-top: var(--header-h); /* greift bei nativen Ankersprüngen */
+  --header-h: 72px;
+  scroll-padding-top: var(--header-h);
+
+  --bg: #0b0d0f;
+  --surface: rgba(255,255,255,0.03);
+  --surface2: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.12);
+
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.76);
+  --muted2: rgba(255,255,255,0.60);
+
+  --link: #5dff72;
+  --accent: #01c301;
+  --accent2: #ffc107;
+
+  --radius: 18px;
+  --radius-sm: 12px;
+
+  --shadow: 0 10px 30px rgba(0,0,0,0.45);
+  --shadow2: 0 8px 20px rgba(0,0,0,0.35);
+
+  --max: 980px;
+  --pad: clamp(16px, 3vw, 28px);
 }
 
-/* Alle Ankerziele bekommen einen „Puffer“ nach oben */
+/* Alle Ankerziele bekommen einen Puffer nach oben */
 [id]{
   scroll-margin-top: var(--header-h);
 }
 
-/* (Optional) Mobile-Menü sichtbar machen, wenn .show getoggelt wird */
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  padding: 0;
+  padding-top: calc(var(--header-h) + 16px);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.65;
+  text-align: center;
+  background:
+    radial-gradient(1200px 600px at 20% 0%, rgba(255,193,7,0.09), transparent 60%),
+    radial-gradient(900px 500px at 80% 10%, rgba(1,195,1,0.07), transparent 55%),
+    var(--bg);
+}
+
+#centerContainer{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  text-align: left;
+}
+
+/* Typografie */
+h1, h2{
+  margin: 0 0 12px 0;
+  line-height: 1.18;
+  letter-spacing: 0.2px;
+}
+
+h2{
+  font-size: clamp(22px, 2.4vw, 28px);
+  margin-top: 8px;
+  color: var(--text);
+}
+
+p{
+  margin: 10px 0;
+  color: var(--muted);
+  max-width: 72ch;
+}
+
+small p{ color: var(--muted2); }
+
+a{
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover{ text-decoration: underline; }
+
+img{ max-width: 100%; }
+
+/* =========================================
+   Header / Navigation
+   ========================================= */
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 14px;
+
+  background: rgba(11,13,15,0.70);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+#hamburger-btn{
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 22px;
+  cursor: pointer;
+  display: none; /* mobile sichtbar */
+}
+
+nav{ display: block; }
+
+/* Dein HTML hat <ul class="menu"><a ...> ohne <li>, daher direkt auf a */
+nav ul.menu{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul.menu a{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+
+  color: rgba(255,255,255,0.82);
+  border: 1px solid transparent;
+  background: transparent;
+  font-weight: 700;
+
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+nav ul.menu a:hover{
+  color: var(--text);
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.10);
+  text-decoration: none;
+}
+
+/* Mobile-Menü sichtbar machen, wenn nav.show getoggelt wird */
 @media (max-width: 700px){
-  nav.show{ display:block; }
+  nav.show{ display: block; }
 }
 
-
-
-body {
-    padding-top: 40px;
-    padding-bottom: 800px;
-    width: 95%; 
-    text-align: center; 
-    margin-bottom: 100px;
-    #centerContainer { max-width: 900px; text-align: left; margin: 0px auto; }
-    color: white;
-    font-family: Helvetica, Arial, sans-serif;
-    margin: 20px;
-    line-height: 1.6;
-    background-color: black;
+/* =========================================
+   Sections als Cards
+   ========================================= */
+section{
+  margin: 34px 0;
+  padding: 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow2);
 }
 
-a {
-    color: #0000ff;
+/* =========================================
+   HERO: Start (du im Zentrum)
+   Logo als Wasserzeichen rechtsbündig
+   ========================================= */
+#start{
+  position: relative;
+  padding: 26px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  box-shadow: var(--shadow);
+  overflow: hidden;
 }
 
-h1 {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 20px;
+/* Subtile Lichtakzente im Hero */
+#start::before{
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(600px 220px at 18% 12%, rgba(255,193,7,0.14), transparent 55%),
+    radial-gradient(560px 240px at 85% 18%, rgba(1,195,1,0.10), transparent 60%);
+  pointer-events: none;
 }
 
-h2 {
-    font-size: 24px;
-    margin-top: 30px;
+/* Optional: Verlauf, damit Text vorne bleibt */
+#start::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.0) 0%,
+    rgba(0,0,0,0.10) 55%,
+    rgba(0,0,0,0.40) 100%
+  );
+  pointer-events: none;
 }
 
-p {
-    margin-bottom: 20px;
+#start > *{ position: relative; }
+
+/* Titel */
+.cool-title{
+  font-family: inherit;
+  font-weight: 850;
+  font-size: clamp(40px, 4.6vw, 56px);
+  margin: 0 0 8px 0;
+  background: linear-gradient(90deg, var(--accent2), #8aa5ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  text-align: left;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+#start .logo{
+  float: right;
+  right: -80px;
 }
 
-ul li {
-    margin-bottom: 10px;
-    padding-left: 20px;
-    position: relative;
+#start .logo img{
+  width: 350px;
+  max-width: none;
+  height: auto;
 }
 
-ul li::before {
-    content: "🚀";
-    position: absolute;
-    left: 0;
-    color: white;
+/* Text im Hero */
+#start h2{
+  margin-top: 6px;
+  font-weight: 650;
+  color: var(--text);
 }
 
-#chatbot {
-    background-color: #333;
-    border: 2px solid #ffc107;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 800px;
-    color: #fff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    text-align: left;
+#start p{
+  color: var(--muted);
+  font-size: 1.05rem;
 }
 
-#chatbot-messages {
-    height: 300px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #444;
+/* =========================================
+   Kontakt: CTA Buttons
+   ========================================= */
+#contact h2{ margin-bottom: 14px; }
+
+/* Kopf.png im Kontakt: gross und rechts */
+#contact .logo{
+  float: right;
+  margin: 0 0 12px 18px; /* Abstand zum Text */
 }
 
-#chatbot-input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    margin-bottom: 10px;
+#contact .logo img{
+  width: 320px;          /* mach 260-420 je nach Geschmack */
+  max-width: 45vw;       /* verhindert Überlauf auf kleinen Screens */
+  height: auto;
 }
 
-#chatbot-send {
-    padding: 10px 20px;
-    background-color: #ffc107;
-    border: none;
-    color: #000;
-    border-radius: 5px;
-    cursor: pointer;
+.cta{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px 16px;
+  margin: 8px 12px 8px 0;
+
+  border-radius: 12px;
+  background: rgba(255,193,7,0.95);
+  color: #0a0a0a;
+
+  font-weight: 850;
+  letter-spacing: 0.2px;
+
+  border: 1px solid rgba(0,0,0,0.18);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+
+  line-height: 1.2;
+  text-decoration: none;
+
+  transition: transform 0.15s ease;
 }
 
-#chatbot-send:hover {
-    background-color: #ffda42;
+.cta:hover{
+  transform: translateY(-1px);
+  text-decoration: none;
 }
 
-.bot img {
-    width: 150px;
-    float:right;
+.cta img{
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
-.cta {
-    font-size: 24px;
-    color: #ffcc00;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 15px 15px;
-    border: 2px solid #ffcc00;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-    line-height: 3;
-    margin-bottom: 50px;
-    margin-right: 25px;
+/* =========================================
+   Chatbot Box
+   ========================================= */
+#chatbot{
+  margin: 34px 0;
+  padding: 22px;
+  border-radius: 22px;
+  background: var(--surface2);
+  border: 1px solid rgba(255,193,7,0.28);
+  box-shadow: var(--shadow2);
+  text-align: left;
 }
 
-.cta:hover {
-    background-color: #ffcc00;
-    color: #000;
+#chatbot p{ color: var(--muted); }
+
+.bot img{
+  width: 150px;
+  height: auto;
+  float: right;
+  opacity: 0.95;
 }
 
-.cta img {
-    width: 30px;
+#chatbot-messages{
+  height: 260px;
+  overflow-y: auto;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.10);
+  margin-bottom: 10px;
 }
 
-.products img {
+#chatbot-input{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  outline: none;
+  margin: 12px 0 10px 0;
+  font-size: 1rem;
+}
+
+#chatbot-input:focus{
+  border-color: rgba(255,193,7,0.55);
+  box-shadow: 0 0 0 4px rgba(255,193,7,0.12);
+}
+
+#chatbot-send{
+  padding: 11px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.18);
+  background: rgba(255,193,7,0.95);
+  color: #0a0a0a;
+  font-weight: 850;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+#chatbot-send:hover{
+  transform: translateY(-1px);
+  background: rgba(255,218,66,0.98);
+}
+
+/* =========================================
+   Listen (dein 🚀 raus, neutral)
+   ========================================= */
+ul{
+  margin: 10px 0 0 18px;
+  padding: 0;
+}
+
+li{
+  margin: 6px 0;
+  color: var(--muted);
+}
+
+/* =========================================
+   Video / Iframes
+   ========================================= */
+video{ width: 100%; }
+
+.video-container{
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.video-container iframe{
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ASCII Beaver */
+#asciiBeaver{
+  font-family: "Courier New", monospace;
+  white-space: pre;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: bold;
+  color: var(--accent);
+  margin-top: 20px;
+}
+
+/* Footer */
+footer{
+  margin-top: 34px;
+  padding: 18px 0 8px 0;
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+/* =========================================
+   Mobile
+   ========================================= */
+@media (max-width: 700px){
+  #hamburger-btn{ display: block; }
+
+  nav{
+    display: none;     /* per JS nav.show toggeln */
     width: 100%;
-}
+    margin-top: 10px;
+  }
 
-.logo {
-    float: right;
-}
-.logo img {
-        max-width:500px;
-}
+  header{
+    flex-wrap: wrap;
+  }
 
-.photo {
-    float: right;
-}
-.photo img {
-        max-width:400px;
-}
+  nav ul.menu{
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
 
-.cool-title {
-    font-family: 'Arial', sans-serif;
-    font-size: 52px;
-    font-weight: bold;
-    background: linear-gradient(to right, #44b805, #040e9e);
-    -webkit-background-clip: text;
-    color: transparent;
-    text-align: center;
-    margin: 30px 0 15px 0;
-    text-shadow: 2px 2px 5px rgba(232, 217, 7, 0.928);
-}
-
-.by-title {
-    font-family: 'Arial', sans-serif;
-    font-size: 30px;
-    font-weight: lighter;
-    background: linear-gradient(to right, #ffcc00, #0000ff);
-    -webkit-background-clip: text;
-    color: transparent;
-    text-align: center;
-    margin: 0 0 75px 140px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
-}
-
-video {
+  nav ul.menu a{
     width: 100%;
-}
+    justify-content: center;
+  }
 
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    height: 0;
-}
+  #start .logo{
+    display: none;
+  }
 
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .cta{
     width: 100%;
-    height: 100%;
+    margin-right: 0;
+  }
+
+  .bot img{
+    float: none;
+    display: block;
+    margin: 10px 0;
+  }
+
+  #contact .logo{
+    float: none;
+    margin: 0 0 12px 0;
+    text-align: center;
+  }
+
+  #contact .logo img{
+    width: 200px;
+    max-width: 70vw;
+  }
 }
 
-#asciiBeaver {
-    font-family: "Courier New", monospace;
-    white-space: pre;
-    font-size: 14px;
-    line-height: 14px;
-    font-weight: bold;
-    color: green;
-}   
-
-header { 
-    padding: 0;
-    position: fixed; /* Make header always visible */
-    top: 0;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    background-color:#0000ff; /* Semi-transparent background */
-    z-index: 1; /* Ensures header stays above other content */
-  }
- 
-  nav ul.menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    display: flex;
-    justify-content: center; /* Center the links horizontally */
-  }
-
-  nav ul.menu a { 
-    display: inline-block;
-    font-weight: bold;
-    margin: 10px 28px 10px 28px; /* Space out the links */
-    color: white; 
-    text-decoration: rgb(226, 43, 43); 
-    padding: 5px;
-    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
-  }
-  nav ul.menu a:hover {
-    background-color: rgb(239, 232, 37); 
-    border-radius: 5px;
-  }
-
-  #hamburger-btn {
-    border: none;
-    font-size: 1px;
-    background: none;
-  }
-
-@media only screen and (max-width: 700px) {
-    .logo {
-        float: right;
-    }
-    .logo img {
-        width:75px;
-    }
-    .cool-title {
-        font-size: 36px;
-    }
-
-    #chatbot-input {
-    font-size: 25px;
-    }
-
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%; /* Full-width nav menu */
-        display: none; /* Hide the nav by default */
-        margin-right: 0;
-        }
-    
-        nav ul {
-        flex-direction: column;
-        align-items: center;
-        }
-        
-        nav a {
-        display: block; /* Make links block-level for better touch targets */
-        margin: 10px 0; /* Spacing between links */
-        }
-    
-        #hamburger-btn {
-        display: block; /* Show hamburger menu */
-        background: none;
-        border: none;
-        color: white;
-        font-size: 3rem;
-        cursor: pointer;
-        margin-right: 10px;
-        }
-    
-        header {
-        flex-wrap: wrap; /* Allow header items to wrap */
-        padding: 0.5rem; /* Reduce padding */
-        }
-    }
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  .cta:hover, #chatbot-send:hover{ transform: none; }
+}
