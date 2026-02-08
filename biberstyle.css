@@ -459,11 +459,33 @@ body::before{
   inset: 0;
   z-index: -1;
 
-  background-image: url("Chatzentobelweiher.jpg"); /* Pfad anpassen */
+  background-image: url("StAntonien.jpg"); /* Pfad anpassen */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
   /* optional: leicht abdunkeln ohne "Transparency" vom Bild selbst */
   filter: brightness(1);
+}
+
+.video-container{
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.video-container video{
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-note{
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--muted2);
 }
