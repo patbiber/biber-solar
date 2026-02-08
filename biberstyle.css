@@ -465,5 +465,5 @@ body::before{
   background-repeat: no-repeat;
 
   /* optional: leicht abdunkeln ohne "Transparency" vom Bild selbst */
-  filter: brightness(0.55);
+  filter: brightness(1);
 }
