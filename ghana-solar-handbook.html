@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar Installer Handbook Ghana — biber.solar</title>
+<meta name="description" content="A practical, simplified solar PV handbook for installers in Ghana and West Africa. Safety, sizing, installation and maintenance.">
+<style>
+  :root{
+    --ink:#141410;
+    --paper:#FAFAF6;
+    --sun:#E8A20C;
+    --sun-deep:#B57D00;
+    --green:#1B5E3B;
+    --danger:#B33A2B;
+    --line:#D8D4C8;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    font-size:17px;
+  }
+  header{
+    background:var(--ink);
+    color:var(--paper);
+    padding:2.2rem 1.2rem 2.6rem;
+    border-bottom:6px solid var(--sun);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 1.2rem}
+  header .wrap{padding:0}
+  .kicker{
+    color:var(--sun);
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:.78rem;
+    font-weight:700;
+    margin:0 0 .6rem;
+  }
+  h1{
+    font-size:clamp(1.9rem,6vw,3rem);
+    line-height:1.12;
+    margin:0 0 .7rem;
+    font-weight:800;
+    letter-spacing:-.01em;
+  }
+  header p{max-width:34rem;margin:0;color:#CFCBBE}
+  nav{
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:10;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  nav .wrap{display:flex;gap:.2rem;padding:0 .6rem}
+  nav a{
+    color:var(--ink);
+    text-decoration:none;
+    padding:.75rem .7rem;
+    font-size:.85rem;
+    font-weight:600;
+    white-space:nowrap;
+    border-bottom:3px solid transparent;
+  }
+  nav a:hover,nav a:focus{border-bottom-color:var(--sun)}
+  main{padding:1rem 0 3rem}
+  section{padding:1.6rem 0;border-bottom:1px solid var(--line)}
+  h2{
+    font-size:1.5rem;
+    margin:.2rem 0 .8rem;
+    display:flex;align-items:baseline;gap:.6rem;
+    font-weight:800;
+  }
+  h2 .num{
+    color:var(--sun-deep);
+    font-size:.95rem;
+    font-weight:800;
+    letter-spacing:.1em;
+  }
+  h3{font-size:1.08rem;margin:1.3rem 0 .4rem;font-weight:700}
+  p{margin:.5rem 0}
+  ul,ol{margin:.4rem 0 .8rem;padding-left:1.3rem}
+  li{margin:.25rem 0}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:.8rem 0;
+    font-size:.92rem;
+    background:var(--card);
+  }
+  th,td{border:1px solid var(--line);padding:.45rem .6rem;text-align:left}
+  th{background:#F1EEE4;font-weight:700}
+  code,.formula{
+    font-family:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;
+    background:#F1EEE4;
+    padding:.08rem .35rem;
+    border-radius:4px;
+    font-size:.92em;
+  }
+  .formula{
+    display:block;
+    padding:.7rem .9rem;
+    margin:.6rem 0;
+    border-left:4px solid var(--sun);
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  .callout{
+    border:1px solid var(--line);
+    border-left:5px solid var(--green);
+    background:var(--card);
+    padding:.8rem 1rem;
+    margin:.9rem 0;
+    border-radius:0 6px 6px 0;
+  }
+  .callout.danger{border-left-color:var(--danger)}
+  .callout.danger strong{color:var(--danger)}
+  .callout.tip{border-left-color:var(--sun)}
+  .rules{counter-reset:rule;list-style:none;padding:0;margin:1rem 0}
+  .rules li{
+    counter-increment:rule;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:.8rem 1rem .8rem 3.2rem;
+    margin:.5rem 0;
+    position:relative;
+  }
+  .rules li::before{
+    content:counter(rule);
+    position:absolute;left:.9rem;top:.75rem;
+    width:1.7rem;height:1.7rem;
+    background:var(--sun);
+    color:var(--ink);
+    font-weight:800;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.95rem;
+  }
+  /* Calculator — the signature element */
+  .calc{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:12px;
+    padding:1.3rem 1.2rem 1.5rem;
+    margin:1.2rem 0;
+  }
+  .calc h3{color:var(--sun);margin-top:0;font-size:1.15rem}
+  .calc label{
+    display:block;
+    font-size:.82rem;
+    font-weight:600;
+    color:#CFCBBE;
+    margin:.7rem 0 .2rem;
+  }
+  .calc input,.calc select{
+    width:100%;
+    padding:.55rem .7rem;
+    font-size:1rem;
+    border-radius:6px;
+    border:1px solid #4A4840;
+    background:#23231E;
+    color:var(--paper);
+    font-family:inherit;
+  }
+  .calc input:focus,.calc select:focus{outline:2px solid var(--sun);outline-offset:1px}
+  .calc .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 .9rem}
+  @media(max-width:520px){.calc .grid{grid-template-columns:1fr}}
+  .calc .results{
+    margin-top:1.2rem;
+    border-top:1px solid #4A4840;
+    padding-top:1rem;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:.8rem;
+  }
+  @media(max-width:520px){.calc .results{grid-template-columns:1fr}}
+  .result{
+    background:#23231E;
+    border-radius:8px;
+    padding:.7rem .8rem;
+  }
+  .result .label{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:#A9A599}
+  .result .value{font-size:1.35rem;font-weight:800;color:var(--sun)}
+  .result .hint{font-size:.78rem;color:#A9A599}
+  footer{
+    background:var(--ink);
+    color:#CFCBBE;
+    padding:1.6rem 1.2rem;
+    font-size:.88rem;
+  }
+  footer a{color:var(--sun)}
+  a{color:var(--green)}
+  :focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+  @media print{nav,.calc{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Field handbook · Ghana &amp; West Africa</p>
+    <h1>Install solar right.<br>Safe, sized, and built to last.</h1>
+    <p>A simple reference for solar installers: safety rules, sizing formulas, installation practice and maintenance — written for the tropical climate. By <a href="https://biber.solar" style="color:var(--sun)">biber.solar</a>.</p>
+  </div>
+</header>
+
+<nav aria-label="Sections">
+  <div class="wrap">
+    <a href="#safety">Safety</a>
+    <a href="#basics">Electricity</a>
+    <a href="#sun">Sun in Ghana</a>
+    <a href="#systems">System types</a>
+    <a href="#sizing">Sizing</a>
+    <a href="#install">Installation</a>
+    <a href="#maintain">Maintenance</a>
+    <a href="#tables">Quick tables</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="safety">
+  <h2><span class="num">01</span> Safety first</h2>
+  <p>Electricity can kill. A current of only <strong>50 mA</strong> through the body can stop the heart. Solar panels produce power whenever the sun shines — you cannot switch off the sun.</p>
+
+  <h3>The 5 rules before working on any electrical installation</h3>
+  <ol class="rules">
+    <li><strong>Disconnect.</strong> Switch off breakers, remove fuses, open the main switch and the DC isolator.</li>
+    <li><strong>Secure against reconnection.</strong> Lock the switch or take the fuses with you. Put up a warning sign.</li>
+    <li><strong>Test for absence of voltage.</strong> Use a two-pole voltage tester. Never trust a switch position alone.</li>
+    <li><strong>Earth and short-circuit</strong> (for systems above 1000 V and overhead lines).</li>
+    <li><strong>Cover nearby live parts</strong> with insulating material before you start.</li>
+  </ol>
+
+  <div class="callout danger">
+    <strong>DC arc danger.</strong> Never disconnect a PV plug (MC4) or fuse under load. A DC arc does not extinguish itself — it burns until the circuit is opened somewhere else. Always switch off the inverter or DC isolator first.
+  </div>
+
+  <h3>Working on roofs</h3>
+  <ul>
+    <li>Use fall protection when working near a roof edge above 2 m: guardrails first, harness with anchor point if guardrails are not possible.</li>
+    <li>Check the roof structure before loading it with panels and people. Old timber or rusted sheets may not carry the weight.</li>
+    <li>Never work on a metal roof during thunderstorms. Stop work when rain makes the roof slippery.</li>
+    <li>Wear a helmet, gloves and shoes with grip. Keep tools tied or in a bag — a falling spanner can injure people below.</li>
+  </ul>
+</section>
+
+<section id="basics">
+  <h2><span class="num">02</span> Electricity basics</h2>
+  <p>Three quantities describe every circuit: voltage <code>U</code> (volts), current <code>I</code> (amps) and resistance <code>R</code> (ohms).</p>
+  <span class="formula">U = R × I &nbsp;&nbsp;·&nbsp;&nbsp; I = U / R &nbsp;&nbsp;·&nbsp;&nbsp; R = U / I</span>
+  <p>Power <code>P</code> (watts) and energy <code>E</code> (watt-hours) are what customers pay for:</p>
+  <span class="formula">P = U × I &nbsp;&nbsp;·&nbsp;&nbsp; E = P × t &nbsp;&nbsp;·&nbsp;&nbsp; 1 kWh = 1000 W for 1 hour</span>
+
+  <h3>Series and parallel</h3>
+  <ul>
+    <li><strong>Series</strong> (panels in a string, cells in a battery bank): voltages add, current stays the same.</li>
+    <li><strong>Parallel</strong> (strings side by side): currents add, voltage stays the same.</li>
+  </ul>
+  <div class="callout tip">
+    <strong>Remember:</strong> In a solar module, <strong>current follows the sunlight</strong> and <strong>voltage follows the temperature</strong>. Hot modules = lower voltage. Bright sun = higher current.
+  </div>
+</section>
+
+<section id="sun">
+  <h2><span class="num">03</span> The sun in Ghana</h2>
+  <p>Ghana has an excellent solar resource: roughly <strong>4.5 to 5.5 peak sun hours (PSH)</strong> per day, depending on region and season. One peak sun hour equals 1000 W/m² of sunshine for one hour.</p>
+  <ul>
+    <li><strong>North (Tamale, Bolgatanga):</strong> ~5.0–5.5 PSH — very strong, drier climate.</li>
+    <li><strong>Middle belt (Kumasi):</strong> ~4.5–5.0 PSH — more clouds in the rainy seasons.</li>
+    <li><strong>Coast (Accra, Takoradi):</strong> ~4.5–5.0 PSH.</li>
+  </ul>
+
+  <h3>Tilt and orientation</h3>
+  <ul>
+    <li>Ghana lies close to the equator (5–11° N). The yearly optimum tilt is small — about equal to the latitude.</li>
+    <li><strong>Use at least 10° tilt anyway</strong>, so rain can wash dust off the panels. Flat panels stay dirty and lose power.</li>
+    <li>Face the modules towards the <strong>south</strong> where possible; east or west costs only a little yield at this latitude.</li>
+    <li>Avoid all shade between 9:00 and 15:00 — trees, water tanks, antennas, parapet walls. Even a small shadow can cut a whole string's output.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Heat costs power.</strong> Module ratings are measured at 25 °C cell temperature. In Ghana, cells easily reach 60–70 °C, and crystalline modules lose about <strong>0.35 % per degree</strong> above 25 °C — often 12–15 % of the rated power. Always leave an air gap of at least <strong>10 cm</strong> under the modules for cooling.
+  </div>
+
+  <div class="callout tip">
+    <strong>Harmattan:</strong> from December to February, dust from the Sahara reduces sunshine and settles on panels. Plan more frequent cleaning in this season, especially in the north.
+  </div>
+</section>
+
+<section id="systems">
+  <h2><span class="num">04</span> System types</h2>
+  <table>
+    <tr><th>Type</th><th>How it works</th><th>Best for</th></tr>
+    <tr><td><strong>Grid-tied</strong></td><td>Inverter feeds solar power into the building and the grid. No battery. Shuts down when the grid fails (anti-islanding).</td><td>Businesses and homes with a reliable grid connection and net metering.</td></tr>
+    <tr><td><strong>Off-grid (stand-alone)</strong></td><td>Panels charge a battery through a charge controller; an inverter supplies the loads. No grid at all.</td><td>Rural homes, farms, telecom sites, clinics without grid access.</td></tr>
+    <tr><td><strong>Hybrid</strong></td><td>Solar + battery + grid (and often a generator). The battery bridges power cuts; solar reduces the bill.</td><td>Areas with frequent "dumsor" power cuts — the most common choice in Ghana.</td></tr>
+  </table>
+  <h3>Charge controllers</h3>
+  <ul>
+    <li><strong>PWM:</strong> cheap, fine for small systems where panel voltage matches battery voltage.</li>
+    <li><strong>MPPT:</strong> 10–30 % more harvest, allows higher panel voltage and longer cable runs. Recommended for most systems.</li>
+  </ul>
+  <h3>Batteries</h3>
+  <ul>
+    <li><strong>LiFePO4 (lithium):</strong> long life (3000+ cycles), 80–90 % usable depth of discharge, safe chemistry, no maintenance. Best value over its lifetime.</li>
+    <li><strong>Lead-acid / gel:</strong> cheaper to buy, but only ~50 % usable and shorter life, especially in heat. Keep them cool, ventilated and charged.</li>
+    <li>Heat shortens battery life. Install batteries in the coolest, shaded, ventilated place available — never in direct sun or a hot metal container.</li>
+  </ul>
+</section>
+
+<section id="sizing">
+  <h2><span class="num">05</span> Sizing a system — step by step</h2>
+
+  <h3>Step 1 — Daily energy need</h3>
+  <p>List every load: power (W) × hours per day = watt-hours (Wh). Add them up.</p>
+  <span class="formula">E_daily [Wh] = Σ ( P_load × hours )</span>
+  <p>Example: 4 LED lamps 10 W × 5 h = 200 Wh · TV 60 W × 4 h = 240 Wh · fridge ≈ 800 Wh · phone charging 30 Wh → <strong>≈ 1270 Wh/day</strong>.</p>
+
+  <h3>Step 2 — Solar array</h3>
+  <span class="formula">P_array [Wp] = E_daily / ( PSH × PR )</span>
+  <p><code>PR</code> is the performance ratio: use <strong>0.70</strong> for battery systems (heat, dust, cable, charging and inverter losses), 0.75–0.80 for grid-tied.</p>
+
+  <h3>Step 3 — Battery bank</h3>
+  <span class="formula">C [Ah] = ( E_daily × days of autonomy ) / ( U_battery × DoD × η )</span>
+  <p>Days of autonomy: 1–2 for hybrid with grid backup, 2–3 for full off-grid. DoD: 0.8 for lithium, 0.5 for lead-acid. η (battery + inverter efficiency): ≈ 0.85.</p>
+
+  <h3>Step 4 — Inverter</h3>
+  <p>Inverter power ≥ the sum of loads that run at the same time, plus reserve for motor start-up (fridges and pumps need 3–5 × their rated power for a moment). Choose a pure sine wave inverter.</p>
+
+  <h3>Step 5 — Cables</h3>
+  <span class="formula">A [mm²] = ( 2 × L × I ) / ( 56 × ΔU )</span>
+  <p><code>L</code> = one-way cable length in m, <code>I</code> = current in A, <code>ΔU</code> = allowed voltage drop in volts (aim for max. 3 % on the battery side — that is only 0.36 V in a 12 V system!). 56 is the conductivity of copper. Low-voltage battery systems need <strong>thick cables</strong>.</p>
+
+  <div class="calc" id="calculator">
+    <h3>⚡ System sizing calculator</h3>
+    <div class="grid">
+      <div>
+        <label for="c-load">Daily energy need (Wh/day)</label>
+        <input id="c-load" type="number" value="1270" min="50" step="10" inputmode="numeric">
+      </div>
+      <div>
+        <label for="c-psh">Peak sun hours (h/day)</label>
+        <input id="c-psh" type="number" value="5.0" min="3" max="7" step="0.1" inputmode="decimal">
+      </div>
+      <div>
+        <label for="c-days">Days of autonomy</label>
+        <input id="c-days" type="number" value="1.5" min="0.5" max="5" step="0.5" inputmode="decimal">
+      </div>
+      <div>
+        <label for="c-volt">Battery voltage</label>
+        <select id="c-volt">
+          <option value="12">12 V</option>
+          <option value="24" selected>24 V</option>
+          <option value="48">48 V</option>
+        </select>
+      </div>
+      <div>
+        <label for="c-chem">Battery type</label>
+        <select id="c-chem">
+          <option value="0.8" selected>Lithium LiFePO4 (80 % DoD)</option>
+          <option value="0.5">Lead-acid / gel (50 % DoD)</option>
+        </select>
+      </div>
+      <div>
+        <label for="c-peak">Largest simultaneous load (W)</label>
+        <input id="c-peak" type="number" value="800" min="100" step="50" inputmode="numeric">
+      </div>
+    </div>
+    <div class="results">
+      <div class="result"><div class="label">Solar array</div><div class="value" id="r-array">—</div><div class="hint" id="r-array-h"></div></div>
+      <div class="result"><div class="label">Battery bank</div><div class="value" id="r-batt">—</div><div class="hint" id="r-batt-h"></div></div>
+      <div class="result"><div class="label">Inverter (min.)</div><div class="value" id="r-inv">—</div><div class="hint">pure sine wave, incl. 25 % reserve</div></div>
+      <div class="result"><div class="label">Controller current (min.)</div><div class="value" id="r-cc">—</div><div class="hint">MPPT, array power ÷ battery voltage × 1.25</div></div>
+    </div>
+    <p style="font-size:.78rem;color:#A9A599;margin:.9rem 0 0">Guide values with PR = 0.70 and system efficiency 0.85. Always check against the real datasheets and local conditions.</p>
+  </div>
+</section>
+
+<section id="install">
+  <h2><span class="num">06</span> Installation best practice</h2>
+  <h3>Mounting</h3>
+  <ul>
+    <li>Fix the rails to the roof structure (rafters/purlins), never only to the roofing sheet.</li>
+    <li>Use stainless or hot-dip galvanised hardware — coastal air and rainy seasons corrode ordinary steel fast.</li>
+    <li>Do not mix bare aluminium and copper directly: galvanic corrosion. Use suitable bimetal or stainless connectors.</li>
+    <li>Clamp modules only in the zones the manufacturer allows. Torque the clamps to specification.</li>
+  </ul>
+  <h3>Wiring</h3>
+  <ul>
+    <li>Use UV-resistant solar cable (PV1-F type) outdoors and genuine, matching MC4 connectors — never mix brands or improvise with tape.</li>
+    <li>Fix cables every 30–50 cm; no cable should touch the hot roof sheet or hang in water.</li>
+    <li>Fuse every parallel string when more than two strings share one input.</li>
+    <li>Keep DC plus and minus of the same string together (small loop area = less lightning-induced voltage).</li>
+  </ul>
+  <h3>Earthing and lightning</h3>
+  <ul>
+    <li>Bond the module frames and mounting rails to earth (min. 6 mm² copper, 10–16 mm² for larger systems).</li>
+    <li>Install surge protection (SPD Type 2) on the DC side near the inverter and on the AC side — thunderstorms are frequent and intense in Ghana.</li>
+    <li>Drive a proper earth rod; measure the earth resistance, do not guess.</li>
+  </ul>
+  <div class="callout">
+    <strong>Regulation:</strong> In Ghana, solar installers and electricians must be licensed by the <strong>Energy Commission</strong>. Grid-connected systems need utility (ECG/NEDCo) approval. Follow IEC standards (IEC 60364, IEC 62446) for design and testing.
+  </div>
+</section>
+
+<section id="maintain">
+  <h2><span class="num">07</span> Maintenance</h2>
+  <ul>
+    <li><strong>Clean the modules</strong> with water and a soft brush early in the morning — never with cold water on hot glass. More often during Harmattan.</li>
+    <li><strong>Check yields monthly.</strong> A sudden drop means shading, dirt, a failed string or a tripped fuse.</li>
+    <li><strong>Inspect yearly:</strong> connectors (discoloured = hot = danger), cable fixings, corrosion on the mounting, tightness of clamps, surge protectors (replace after big strikes), inverter error log.</li>
+    <li><strong>Batteries:</strong> keep terminals clean and tight; for lead-acid check electrolyte level and equalise as the maker specifies; keep the room ventilated.</li>
+    <li>Cut back trees and bushes before they shade the array.</li>
+  </ul>
+</section>
+
+<section id="tables">
+  <h2><span class="num">08</span> Quick reference</h2>
+  <h3>Copper cable — maximum current (guide values)</h3>
+  <table>
+    <tr><th>Cross-section</th><th>Max. current</th></tr>
+    <tr><td>2.5 mm²</td><td>16 A</td></tr>
+    <tr><td>4 mm²</td><td>20 A</td></tr>
+    <tr><td>6 mm²</td><td>25 A</td></tr>
+    <tr><td>10 mm²</td><td>40 A</td></tr>
+    <tr><td>16 mm²</td><td>63 A</td></tr>
+  </table>
+  <p>Derate in hot conduits and bundles. For battery cables, the <em>voltage drop</em> usually decides, not the current rating.</p>
+
+  <h3>Key formulas</h3>
+  <table>
+    <tr><th>What</th><th>Formula</th></tr>
+    <tr><td>Power</td><td><code>P = U × I</code></td></tr>
+    <tr><td>Energy</td><td><code>E = P × t</code></td></tr>
+    <tr><td>Array size</td><td><code>Wp = Wh/day ÷ (PSH × 0.7)</code></td></tr>
+    <tr><td>Battery</td><td><code>Ah = Wh × days ÷ (V × DoD × 0.85)</code></td></tr>
+    <tr><td>Cable size</td><td><code>mm² = 2 × L × I ÷ (56 × ΔU)</code></td></tr>
+    <tr><td>Max. string voltage</td><td><code>U = Uoc × n × 1.02</code> (cool mornings raise Uoc — stay below the inverter/controller limit)</td></tr>
+  </table>
+
+  <h3>Typical loads</h3>
+  <table>
+    <tr><th>Appliance</th><th>Power</th><th>Typical Wh/day</th></tr>
+    <tr><td>LED lamp</td><td>5–12 W</td><td>25–60</td></tr>
+    <tr><td>Phone charger</td><td>10 W</td><td>20–40</td></tr>
+    <tr><td>Fan (standing)</td><td>50–70 W</td><td>300–500</td></tr>
+    <tr><td>TV (LED, 32")</td><td>40–60 W</td><td>150–300</td></tr>
+    <tr><td>Fridge (efficient)</td><td>100–150 W</td><td>600–1200</td></tr>
+    <tr><td>Water pump (small)</td><td>370–750 W</td><td>depends on use</td></tr>
+    <tr><td>Air conditioner (1 HP)</td><td>~900 W</td><td>3000–7000</td></tr>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="padding:0">
+    <p><strong style="color:var(--paper)">Solar Installer Handbook — Ghana edition</strong><br>
+    Adapted from the Swiss Solarteur knowledge base by Patrick Biber · <a href="https://biber.solar">biber.solar</a> · <a href="mailto:patrick@biber.solar">patrick@biber.solar</a></p>
+    <p>Guide values only. Always follow the manufacturer's datasheets, IEC standards and the rules of the Ghana Energy Commission. Safety rules are non-negotiable.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var ids=['c-load','c-psh','c-days','c-volt','c-chem','c-peak'];
+  function n(id){return parseFloat(document.getElementById(id).value)||0}
+  function fmt(x,d){return x.toLocaleString('en-GB',{maximumFractionDigits:d===undefined?0:d})}
+  function calc(){
+    var load=n('c-load'),psh=n('c-psh'),days=n('c-days'),v=n('c-volt'),dod=n('c-chem'),peak=n('c-peak');
+    if(!load||!psh||!v){return}
+    var pr=0.70,eff=0.85;
+    var wp=load/(psh*pr);
+    var ah=(load*days)/(v*dod*eff);
+    var kwh=ah*v/1000;
+    var inv=peak*1.25;
+    var cc=wp/v*1.25;
+    document.getElementById('r-array').textContent=fmt(wp)+' Wp';
+    document.getElementById('r-array-h').textContent='e.g. '+Math.ceil(wp/450)+' × 450 Wp modules';
+    document.getElementById('r-batt').textContent=fmt(ah)+' Ah @ '+v+' V';
+    document.getElementById('r-batt-h').textContent='≈ '+fmt(kwh,1)+' kWh total capacity';
+    document.getElementById('r-inv').textContent=fmt(inv)+' W';
+    document.getElementById('r-cc').textContent=fmt(cc)+' A';
+  }
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',calc)});
+  calc();
+})();
+</script>
+</body>
+</html>
