@@ -1,0 +1,7 @@
+{
+  "name": "biber-solar",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}

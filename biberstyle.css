@@ -340,6 +340,40 @@ section{
 }
 
 /* =========================================
+   Feedback
+   ========================================= */
+#feedback-form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+#feedback-input{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  outline: none;
+  margin: 4px 0 10px 0;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+#feedback-input:focus{
+  border-color: rgba(255,193,7,0.55);
+  box-shadow: 0 0 0 4px rgba(255,193,7,0.12);
+}
+
+#feedback-status{
+  color: var(--muted2);
+  font-size: 0.9rem;
+}
+
+/* =========================================
    Listen (dein 🚀 raus, neutral)
    ========================================= */
 ul{
