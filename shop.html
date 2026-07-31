@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Balkonkraftwerk Shop – Biber Solar</title>
+    <meta name="description" content="Balkonkraftwerk-Sets, Solarmodule und Mikrowechselrichter direkt bei Patrick Biber bestellen.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Patrick Biber">
+    <link rel="icon" href="tree.png" type="image/png">
+    <link rel="stylesheet" href="biberstyle.css">
+    <link rel="stylesheet" href="shop.css">
+    <script src="navigator.js"></script>
+</head>
+<body>
+    <div id="centerContainer">
+        <header class="shop-header">
+            <a href="index.html" class="back-link">← Zurück zu biber.solar</a>
+        </header>
+
+        <section id="shop-intro">
+            <h1>🔌 Balkonkraftwerk Shop</h1>
+            <p>Steckerfertige Balkonkraftwerke, Module und Mikrowechselrichter – ausgesucht für den einfachen Einstieg in die eigene Solarproduktion auf Balkon oder Terrasse.</p>
+            <p class="note">🚧 Der Shop befindet sich im Testbetrieb. Produkte, Preise und Lieferzeiten sind Platzhalter und werden laufend ergänzt. Bei Fragen zu einer Bestellung schreib mir direkt: <a href="mailto:patrick@biber.solar">patrick@biber.solar</a></p>
+        </section>
+
+        <section id="shop-products">
+            <h2>Produkte</h2>
+            <div id="product-grid" class="product-grid">
+                <p>Produkte werden geladen …</p>
+            </div>
+        </section>
+
+        <section id="shop-cart">
+            <h2>🛒 Warenkorb (<span id="cart-count">0</span>)</h2>
+            <div id="cart-list">
+                <p>Dein Warenkorb ist leer.</p>
+            </div>
+            <p class="cart-total-row">Total: CHF <span id="cart-total">0.00</span></p>
+            <button type="button" id="checkout-btn" class="cta" disabled>Zur Kasse</button>
+            <p id="checkout-status" class="note" role="status" aria-live="polite"></p>
+        </section>
+
+        <footer>
+            <small>
+                <p><a href="impressum_de.html">Impressum</a> · <a href="datenschutzerklaerung_de.html">Datenschutz</a></p>
+            </small>
+        </footer>
+    </div>
+
+    <script src="shop.js"></script>
+</body>
+</html>
