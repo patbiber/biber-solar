@@ -1,10 +1,67 @@
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(express.static(__dirname));
+
+function loadProducts() {
+    const data = fs.readFileSync(path.join(__dirname, 'products.json'), 'utf8');
+    return JSON.parse(data);
+}
+
+app.get('/api/products', (req, res) => {
+    res.json(loadProducts());
+});
+
+// Erzeugt eine Stripe Checkout Session. Preise werden serverseitig aus
+// products.json berechnet, damit Clients keine Preise manipulieren können.
+app.post('/api/create-checkout-session', async (req, res) => {
+    try {
+        const products = loadProducts();
+        const items = Array.isArray(req.body.items) ? req.body.items : [];
+
+        if (items.length === 0) {
+            return res.status(400).json({ error: 'Warenkorb ist leer.' });
+        }
+
+        const line_items = items.map((item) => {
+            const product = products.find((p) => p.id === item.id);
+            const quantity = Math.floor(Number(item.quantity));
+            if (!product || !Number.isInteger(quantity) || quantity < 1 || quantity > 20) {
+                throw new Error('Ungültiger Warenkorb-Eintrag.');
+            }
+            return {
+                price_data: {
+                    currency: 'chf',
+                    product_data: { name: product.name },
+                    unit_amount: Math.round(product.priceChf * 100),
+                },
+                quantity,
+            };
+        });
+
+        const origin = req.headers.origin || `${req.protocol}://${req.get('host')}`;
+
+        const session = await stripe.checkout.sessions.create({
+            mode: 'payment',
+            line_items,
+            shipping_address_collection: { allowed_countries: ['CH', 'DE', 'AT', 'LI'] },
+            success_url: `${origin}/shop-success.html?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${origin}/shop-cancel.html`,
+        });
+
+        res.json({ url: session.url });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ error: 'Checkout konnte nicht erstellt werden.' });
+    }
+});
 
 // Speichert den Konversationsverlauf für jede Sitzung
 const sessions = {};

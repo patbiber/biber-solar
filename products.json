@@ -1,0 +1,34 @@
+[
+  {
+    "id": "bkw-400",
+    "name": "Balkonkraftwerk 400W Komplett-Set",
+    "description": "2 Solarmodule à 200W, Mikrowechselrichter und Balkonhalterung inklusive Anschlusskabel. Steckerfertig für den Eigenverbrauch.",
+    "priceChf": 349.0,
+    "wattPeak": 400,
+    "icon": "🔌"
+  },
+  {
+    "id": "bkw-800",
+    "name": "Balkonkraftwerk 800W Komplett-Set",
+    "description": "2 Solarmodule à 415W, Mikrowechselrichter (800W) und Balkonhalterung inklusive Anschlusskabel. Ausgelegt auf die aktuelle Schweizer Grenze für vereinfachte Anmeldung.",
+    "priceChf": 599.0,
+    "wattPeak": 800,
+    "icon": "🔋"
+  },
+  {
+    "id": "modul-415",
+    "name": "Solarmodul 415W (Einzelmodul)",
+    "description": "Monokristallines Einzelmodul zum Erweitern eines bestehenden Balkonkraftwerks.",
+    "priceChf": 149.0,
+    "wattPeak": 415,
+    "icon": "🟦"
+  },
+  {
+    "id": "wr-800",
+    "name": "Mikrowechselrichter 800W",
+    "description": "Einzelner Mikrowechselrichter mit WLAN-Monitoring, kompatibel zu gängigen 400W-Modulen.",
+    "priceChf": 129.0,
+    "wattPeak": 800,
+    "icon": "⚡"
+  }
+]

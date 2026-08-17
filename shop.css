@@ -1,0 +1,132 @@
+/* shop.css
+   Ergänzende Styles für shop.html, shop-success.html, shop-cancel.html.
+   Baut auf biberstyle.css auf (Farbvariablen, .cta, .note, #centerContainer). */
+
+header.shop-header{
+  justify-content: flex-start;
+}
+
+.back-link{
+  font-weight: 700;
+  color: var(--text);
+}
+
+#shop-intro h1{
+  font-size: clamp(28px, 3.4vw, 40px);
+  margin-bottom: 10px;
+}
+
+.note{
+  font-size: 0.92rem;
+  color: var(--muted2);
+  border-left: 3px solid var(--accent2);
+  padding: 8px 12px;
+  background: rgba(255,193,7,0.08);
+  border-radius: 8px;
+}
+
+.product-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.product-card{
+  padding: 18px;
+  border-radius: var(--radius-sm);
+  background: var(--surface2);
+  border: 1px solid rgba(255,255,255,0.08);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-icon{
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.product-card h3{
+  margin: 0 0 6px 0;
+  color: var(--text);
+}
+
+.product-card p{
+  font-size: 0.92rem;
+}
+
+.product-watt{
+  color: var(--muted2);
+  font-size: 0.85rem !important;
+}
+
+.product-price{
+  font-weight: 800;
+  color: var(--accent2);
+  font-size: 1.1rem !important;
+}
+
+.product-card .cta{
+  margin-top: auto;
+  align-self: stretch;
+  text-align: center;
+}
+
+#cart-list{
+  margin: 14px 0;
+}
+
+.cart-row{
+  display: grid;
+  grid-template-columns: 1fr 70px 100px 32px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.cart-row-name{
+  color: var(--text);
+}
+
+.cart-row-price{
+  text-align: right;
+  color: var(--muted);
+}
+
+.cart-qty{
+  width: 100%;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+}
+
+.cart-remove{
+  border: none;
+  background: transparent;
+  color: var(--muted2);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.cart-remove:hover{
+  color: var(--accent2);
+}
+
+.cart-total-row{
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+#checkout-status:empty{
+  display: none;
+}
+
+@media (max-width: 700px){
+  .cart-row{
+    grid-template-columns: 1fr 60px 90px 28px;
+  }
+}
