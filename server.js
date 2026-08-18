@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
+const Parser = require('rss-parser');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -8,6 +9,44 @@ app.use(express.json());
 
 // Speichert den Konversationsverlauf für jede Sitzung
 const sessions = {};
+
+// pv-magazine.de Newsfeed: serverseitig geholt (umgeht CORS) und kurz gecacht,
+// damit nicht jeder Seitenaufruf einen neuen Request beim Feed auslöst.
+const rssParser = new Parser({ timeout: 8000 });
+const PV_NEWS_FEED_URL = 'https://www.pv-magazine.de/feed/';
+const PV_NEWS_CACHE_TTL_MS = 20 * 60 * 1000;
+const PV_NEWS_MAX_ITEMS = 6;
+let pvNewsCache = { items: [], fetchedAt: 0 };
+
+async function getPvNews() {
+    const isFresh = Date.now() - pvNewsCache.fetchedAt < PV_NEWS_CACHE_TTL_MS;
+    if (isFresh && pvNewsCache.items.length > 0) {
+        return pvNewsCache.items;
+    }
+
+    const feed = await rssParser.parseURL(PV_NEWS_FEED_URL);
+    const items = (feed.items || []).slice(0, PV_NEWS_MAX_ITEMS).map((item) => ({
+        title: item.title || '',
+        link: item.link || '',
+        pubDate: item.isoDate || item.pubDate || null,
+    }));
+
+    pvNewsCache = { items, fetchedAt: Date.now() };
+    return items;
+}
+
+app.get('/api/pv-news', async (req, res) => {
+    try {
+        const items = await getPvNews();
+        res.json({ items });
+    } catch (error) {
+        console.error('pv-magazine.de Feed konnte nicht geladen werden:', error.message);
+        if (pvNewsCache.items.length > 0) {
+            return res.json({ items: pvNewsCache.items, stale: true });
+        }
+        res.status(502).json({ error: 'News konnten nicht geladen werden.' });
+    }
+});
 
 app.post('/api/chat', async (req, res) => {
     const userMessage = req.body.message;
