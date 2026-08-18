@@ -1,0 +1,20 @@
+name: Feature Request
+description: Idee, Wunsch oder Fehlerhinweis für biber.solar
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Was möchtest du?
+      description: Beschreibe deine Idee, deinen Wunsch oder den Fehler möglichst konkret.
+      placeholder: z.B. "Es wäre toll, wenn..."
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Zusätzlicher Kontext
+      description: Screenshots, Links oder weitere Hinweise (optional).
+    validations:
+      required: false
