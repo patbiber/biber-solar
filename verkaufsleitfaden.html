@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verkaufsleitfaden für Solar-Fachberater — biber.solar</title>
+<meta name="description" content="Praktischer Verkaufsleitfaden für Solar-Fachberater: Gesprächseröffnung, Bedarfsanalyse, Kundenmotive, Argumentationstechnik und Abschluss.">
+<style>
+  :root{
+    --ink:#141410;
+    --paper:#FAFAF6;
+    --sun:#E8A20C;
+    --sun-deep:#B57D00;
+    --green:#1B5E3B;
+    --danger:#B33A2B;
+    --line:#D8D4C8;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    font-size:17px;
+  }
+  header{
+    background:var(--ink);
+    color:var(--paper);
+    padding:2.2rem 1.2rem 2.6rem;
+    border-bottom:6px solid var(--sun);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 1.2rem}
+  header .wrap{padding:0}
+  .kicker{
+    color:var(--sun);
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:.78rem;
+    font-weight:700;
+    margin:0 0 .6rem;
+  }
+  h1{
+    font-size:clamp(1.9rem,6vw,3rem);
+    line-height:1.12;
+    margin:0 0 .7rem;
+    font-weight:800;
+    letter-spacing:-.01em;
+  }
+  header p{max-width:34rem;margin:0;color:#CFCBBE}
+  nav{
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:10;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  nav .wrap{display:flex;gap:.2rem;padding:0 .6rem}
+  nav a{
+    color:var(--ink);
+    text-decoration:none;
+    padding:.75rem .7rem;
+    font-size:.85rem;
+    font-weight:600;
+    white-space:nowrap;
+    border-bottom:3px solid transparent;
+  }
+  nav a:hover,nav a:focus{border-bottom-color:var(--sun)}
+  main{padding:1rem 0 3rem}
+  section{padding:1.6rem 0;border-bottom:1px solid var(--line)}
+  h2{
+    font-size:1.5rem;
+    margin:.2rem 0 .8rem;
+    display:flex;align-items:baseline;gap:.6rem;
+    font-weight:800;
+  }
+  h2 .num{
+    color:var(--sun-deep);
+    font-size:.95rem;
+    font-weight:800;
+    letter-spacing:.1em;
+  }
+  h3{font-size:1.08rem;margin:1.3rem 0 .4rem;font-weight:700}
+  p{margin:.5rem 0}
+  ul,ol{margin:.4rem 0 .8rem;padding-left:1.3rem}
+  li{margin:.25rem 0}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:.8rem 0;
+    font-size:.92rem;
+    background:var(--card);
+  }
+  th,td{border:1px solid var(--line);padding:.45rem .6rem;text-align:left}
+  th{background:#F1EEE4;font-weight:700}
+  code,.formula{
+    font-family:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;
+    background:#F1EEE4;
+    padding:.08rem .35rem;
+    border-radius:4px;
+    font-size:.92em;
+  }
+  .formula{
+    display:block;
+    padding:.7rem .9rem;
+    margin:.6rem 0;
+    border-left:4px solid var(--sun);
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  .callout{
+    border:1px solid var(--line);
+    border-left:5px solid var(--green);
+    background:var(--card);
+    padding:.8rem 1rem;
+    margin:.9rem 0;
+    border-radius:0 6px 6px 0;
+  }
+  .callout.danger{border-left-color:var(--danger)}
+  .callout.danger strong{color:var(--danger)}
+  .callout.tip{border-left-color:var(--sun)}
+  .rules{counter-reset:rule;list-style:none;padding:0;margin:1rem 0}
+  .rules li{
+    counter-increment:rule;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:.8rem 1rem .8rem 3.2rem;
+    margin:.5rem 0;
+    position:relative;
+  }
+  .rules li::before{
+    content:counter(rule);
+    position:absolute;left:.9rem;top:.75rem;
+    width:1.7rem;height:1.7rem;
+    background:var(--sun);
+    color:var(--ink);
+    font-weight:800;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.95rem;
+  }
+  .quote{
+    font-style:italic;
+    border-left:4px solid var(--line);
+    padding:.4rem 0 .4rem 1rem;
+    margin:.8rem 0;
+    color:#4a4940;
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}
+  .chip{
+    background:#F1EEE4;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:.3rem .7rem;
+    font-size:.85rem;
+  }
+  .funnel{
+    display:grid;
+    gap:.5rem;
+    margin:1rem 0;
+  }
+  .funnel .step{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:10px;
+    padding:.8rem 1rem;
+  }
+  .funnel .step b{color:var(--sun)}
+  .funnel .step small{display:block;color:#CFCBBE;margin-top:.2rem}
+  .traffic{display:flex;gap:.4rem;align-items:center}
+  .dot{width:.8rem;height:.8rem;border-radius:50%;display:inline-block}
+  .dot.red{background:var(--danger)}
+  .dot.blue{background:#3B6FB3}
+  .dot.green{background:var(--green)}
+  .source-note{font-size:.8rem;color:#8a8878}
+  footer{
+    background:var(--ink);
+    color:#CFCBBE;
+    padding:1.6rem 1.2rem;
+    font-size:.88rem;
+  }
+  footer a{color:var(--sun)}
+  a{color:var(--green)}
+  :focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+  @media print{nav{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Verkaufsleitfaden · Fachberater Solar</p>
+    <h1>Solarprodukte überzeugend verkaufen.<br>Vom Erstkontakt zum Abschluss.</h1>
+    <p>Ein praktischer Leitfaden für Beratungsgespräche mit Solar-Kund:innen: Haltung, Gesprächseröffnung, Bedarfsanalyse, Argumentation und Abschluss. Zusammengestellt aus dem Verkaufstraining "Solarprodukte überzeugend verkaufen können" (Roger Zosso, trainings-consult AG) und dem Fotoprotokoll des Praxistrainings. Von <a href="https://biber.solar" style="color:var(--sun)">biber.solar</a>.</p>
+  </div>
+</header>
+
+<nav aria-label="Sections">
+  <div class="wrap">
+    <a href="#haltung">Haltung</a>
+    <a href="#wirkung">Wirkung</a>
+    <a href="#trichter">Fahrplan</a>
+    <a href="#eroeffnung">Eröffnung</a>
+    <a href="#analyse">Analyse</a>
+    <a href="#motive">Kundenmotive</a>
+    <a href="#argumentieren">Argumentieren</a>
+    <a href="#argumente">Unsere Argumente</a>
+    <a href="#preis">Preis</a>
+    <a href="#abschluss">Abschluss</a>
+    <a href="#checkliste">Checkliste</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="haltung">
+  <h2><span class="num">01</span> Haltung und Ziel</h2>
+  <p>Verkaufen beginnt nicht im Gespräch, sondern in der eigenen Haltung davor. Vier Bereiche verlangen laufend Aufmerksamkeit — im Zentrum stehst dabei <strong>du selbst</strong>:</p>
+  <ul>
+    <li><strong>Mensch</strong> — die Beziehung zum Kunden, zu Kolleg:innen, zu Partnern</li>
+    <li><strong>Zeit und Organisation</strong> — Vorbereitung, Nachfassen, Struktur im Alltag</li>
+    <li><strong>Fachwissen</strong> — die technische und betriebswirtschaftliche Grundlage, ohne die keine Argumentation trägt</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Erfolg = Ziel erreicht.</strong> Ohne Ziel kein Erfolg. Bevor du in ein Beratungsgespräch oder in eine Preisverhandlung gehst, formuliere dir ein <strong>SMART</strong>es Ziel:
+    <ul>
+      <li><strong>S</strong>pezifisch</li>
+      <li><strong>M</strong>essbar / beurteilbar</li>
+      <li><strong>A</strong>nspruchsvoll</li>
+      <li><strong>R</strong>ealistisch</li>
+      <li><strong>T</strong>erminiert</li>
+      <li>und <strong>positiv</strong> formuliert</li>
+    </ul>
+  </div>
+
+  <p>Zwei Haltungen, die im Praxistraining als zentral herausgearbeitet wurden:</p>
+  <div class="callout">
+    <strong>Mut zum Risiko.</strong> Verkaufen heisst, sich Kontakten auszusetzen — mit Höhen (Freude) und Tiefen (Rückschlägen). Wer den Kontakt scheut, um das Risiko einer Absage zu vermeiden, verliert auch die Chance auf den Abschluss.
+  </div>
+  <div class="callout">
+    <strong>Aus Kunden Fans machen.</strong> Das eigentliche Ziel eines guten Gesprächs ist nicht nur der einzelne Abschluss, sondern die <strong>aktive, freiwillige Weiterempfehlung</strong>. Ein Kunde, der zum Fan wird, verkauft für dich weiter.
+  </div>
+</section>
+
+<section id="wirkung">
+  <h2><span class="num">02</span> Deine persönliche Wirkung</h2>
+  <p>Im Praxistraining wurde ein Punkt besonders betont: <strong>die persönliche Wirkung ist entscheidend</strong> — mehr als reines Fachwissen allein. Das lässt sich mit dem <strong>SCIL-Modell</strong> ordnen:</p>
+  <table>
+    <tr><th>Wirkung</th><th>Bedeutet</th></tr>
+    <tr><td><strong>Sensus</strong></td><td>Emotionale Wirkung — was löst dein Auftreten beim Kunden aus?</td></tr>
+    <tr><td><strong>Corpus</strong></td><td>Körperliche Wirkung — Haltung, Gestik, Mimik, Blickkontakt</td></tr>
+    <tr><td><strong>Intellectus</strong></td><td>Intellektuelle Wirkung — Fachkompetenz, Klarheit der Argumente</td></tr>
+    <tr><td><strong>Lingua</strong></td><td>Sprachliche Wirkung — Wortwahl, Tonfall, Formulierungen</td></tr>
+  </table>
+
+  <h3>Rapport aufnehmen</h3>
+  <p>Bevor Inhalte überzeugen, muss der Draht zum Gegenüber stimmen. Achte bewusst auf:</p>
+  <div class="chips">
+    <span class="chip">Haltung</span>
+    <span class="chip">Gestik</span>
+    <span class="chip">Mimik</span>
+    <span class="chip">Blickkontakt</span>
+    <span class="chip">Stimme</span>
+    <span class="chip">Gefühl</span>
+  </div>
+  <p>Und im "Alarmbereich" — wenn es hart auf hart kommt (Preisverhandlung, Einwand, Konflikt): bewahre <strong>Eigenton, Ruhe, Gelassenheit</strong> und zeig deine <strong>Fachkompetenz</strong>. Das sind laut Praxistraining genau die Eigenschaften, die einen guten Verkäufer von einem weniger guten unterscheiden.</p>
+
+  <div class="quote">
+    "Ich verbeuge mich vor keinem Menschen, und kein anderer Mensch hat sich vor mir zu verbeugen. Wir sind alle ebenbürtig." — Ein Indianerhäuptling, zitiert im Verkaufstraining
+  </div>
+  <p>Bei einer Verhandlung geht es nicht darum, den anderen zu besiegen oder gegen ihn zu verlieren. Es geht darum, ein gutes Gespräch zu führen, bei dem am Schluss beide sagen können: <em>"Es hat sich gelohnt!"</em></p>
+
+  <div class="callout">
+    <strong>Der gute Verkäufer kann mit Spannung umgehen.</strong> Zwischen dem, was der Kunde bieten will, und dem, was du kalkulierst, entsteht fast immer eine Spannung. Sie gehört zum Prozess — halte sie aus, statt vorschnell nachzugeben oder sie zu ignorieren. Mehr dazu unter <a href="#preis">Preisverhandlung</a>.
+  </div>
+</section>
+
+<section id="trichter">
+  <h2><span class="num">03</span> Der Gesprächsfahrplan</h2>
+  <p>Jedes Verkaufsgespräch durchläuft vom ersten Kontakt bis zum Ja/Nein vier Phasen — wie ein Trichter, der sich zuspitzt:</p>
+  <div class="funnel">
+    <div class="step"><b>1. Eröffnung</b> — Aufmerksamkeit wecken, "anders als alle anderen" (AAAA)<small>siehe Kapitel 4</small></div>
+    <div class="step"><b>2. Analyse</b> — öffnende Fragen, den Bedarf verstehen<small>siehe Kapitel 5–6</small></div>
+    <div class="step"><b>3. Argumentation</b> — Problem, Lösung, Nutzen (PLN)<small>siehe Kapitel 7–8</small></div>
+    <div class="step"><b>4. Abschluss</b> — Kaufsignale erkennen, zum Ja führen<small>siehe Kapitel 10</small></div>
+  </div>
+  <p class="source-note">Der Bedarf ist dabei immer strategisch am Menschen ausgerichtet — nicht nur am Produkt.</p>
+</section>
+
+<section id="eroeffnung">
+  <h2><span class="num">04</span> Gesprächseröffnung</h2>
+  <p>Ziel der Eröffnung: Aufmerksamkeit wecken, Zuwendung des Kunden bewirken, Kontakt festigen. Gute Eröffnungssätze kommen aus vier Bereichen:</p>
+  <table>
+    <tr><th>Bereich</th><th>Beispiele</th></tr>
+    <tr><td><strong>Allgemeine Situation</strong></td><td>Preisentwicklung, Rohstoffversorgung, Markt- und Umweltsituation, Förderprogramme</td></tr>
+    <tr><td><strong>Kundensituation</strong></td><td>Bauvorhaben, Sanierung, bauliche Veränderungen, aktuelle Stromrechnung</td></tr>
+    <tr><td><strong>Eigensituation</strong></td><td>Referenzprojekte, Auszeichnungen, neue Kundendienste, Kostenvergleiche</td></tr>
+    <tr><td><strong>Eigenes Angebot</strong></td><td>Neue Module/Speicher, Produktergänzungen, aktuelle Konditionen</td></tr>
+  </table>
+  <div class="callout tip">
+    <strong>Merke:</strong> Eröffne das Gespräch <strong>A</strong>nders <strong>a</strong>ls <strong>a</strong>lle <strong>A</strong>nderen (AAAA). Wer mit derselben Floskel startet wie jeder andere Verkäufer, hat die erste Chance auf Aufmerksamkeit bereits verschenkt.
+  </div>
+</section>
+
+<section id="analyse">
+  <h2><span class="num">05</span> Bedarfsanalyse</h2>
+  <h3>Öffnende und abschliessende Fragen</h3>
+  <table>
+    <tr><th>Typ</th><th>Erkennungsmerkmal</th><th>Einsatz</th><th>Beispiele</th></tr>
+    <tr>
+      <td><strong>Öffnende Frage</strong></td>
+      <td>beginnt mit Fragewort (was, wie, wo, welche …)</td>
+      <td>vor allem am Gesprächsanfang — Kunde muss sich detailliert äussern</td>
+      <td>"Was genau suchen Sie?" · "Was erwarten Sie von Ihrer Anlage?"</td>
+    </tr>
+    <tr>
+      <td><strong>Abschliessende Frage</strong></td>
+      <td>beginnt mit einem Verb, Antwort Ja/Nein</td>
+      <td>um Phasen abzuschliessen oder zu untermauern</td>
+      <td>"Verstehe ich Sie richtig, das ist Ihnen wichtiger?" · "Darf ich das so festhalten?"</td>
+    </tr>
+  </table>
+
+  <h3>Positives aufgreifen — die Erdbeer-Methode</h3>
+  <p>Genau hinsehen, jedes positive Signal aufheben, und an der gleichen Stelle nachfassen — wie beim Erdbeersuchen im Wald. Der Kunde sagt: <em>"Ich finde Ihr Angebot im Prinzip gut."</em> Du greifst auf: <em>"Sie finden das Angebot im Prinzip gut — was gefällt Ihnen speziell daran?"</em></p>
+
+  <h3>Negatives liegen lassen</h3>
+  <ul>
+    <li><strong>Überhören:</strong> Kunde sagt "Das Produkt wäre nützlich, aber die Farbe gefällt mir nicht" → du reagierst nur auf "nützlich".</li>
+    <li><strong>Recht geben und weiter vertiefen:</strong> "Sie haben recht — und die Leistung entspricht sonst Ihren Wünschen?"</li>
+  </ul>
+  <div class="callout danger">
+    <strong>Nicht wegdiskutieren.</strong> Ein Rostfleck bleibt ein Rostfleck. Stundenlanges Diskutieren verankert das Negative nur noch mehr im Gedächtnis des Kunden.
+  </div>
+
+  <h3>Weitersuchen, wenn nichts kommt</h3>
+  <p>Kein Erfolg an einer Stelle → Thema wechseln, in die Gegenrichtung fragen: "Das stelle ich mir anders vor." → "Wie stellen Sie es sich vor?" Kehrt der Kunde immer wieder zu einem negativen Punkt zurück, wechsle zu einer Frage, die ihn persönlich betrifft — dafür interessiert sich jeder Mensch am meisten.</p>
+
+  <h3>Zuhören und ausreden lassen</h3>
+  <p>Menschen sagen zuerst das Nebensächliche, das Wesentliche kommt später. Lass den Kunden aussprechen, warte danach noch ein, zwei Sekunden — oft kommt gerade dann die entscheidende Ergänzung.</p>
+
+  <h3>Fragen begründen</h3>
+  <p>Eine unbegründete Frage wirkt schnell indiskret. <em>"In welchen Monaten haben Sie die höchsten Einnahmen?"</em> wirkt neugierig. <em>"Ich frage nur, weil ich Ihnen mit den Zahlungskonditionen entgegenkommen möchte"</em> macht dieselbe Frage willkommen.</p>
+</section>
+
+<section id="motive">
+  <h2><span class="num">06</span> Kundenmotive verstehen</h2>
+  <p>Um was geht es dem Kunden wirklich? Sechs Motivkategorien, mit typischen Solar-Beispielen aus der Praxis:</p>
+  <table>
+    <tr><th>Motiv</th><th>Beispiele bei Solarkunden</th></tr>
+    <tr><td><strong>Geld, Gewinn</strong></td><td>Gute Investition tätigen, Heizkosten sparen, günstige Investition machen</td></tr>
+    <tr><td><strong>Sicherheit</strong></td><td>Sich verlassen können, Qualität des Hauses erhöhen, Versorgungssicherheit</td></tr>
+    <tr><td><strong>Bequemlichkeit</strong></td><td>Alles aus einer Hand, sich um nichts kümmern müssen, reibungslose Installation</td></tr>
+    <tr><td><strong>Neugier, Wissen</strong></td><td>Neue Technologie am Haus, nachhaltige Energie nutzen, etwas Neues ausprobieren</td></tr>
+    <tr><td><strong>Kontaktstreben</strong></td><td>Angenehme Zusammenarbeit, Freude am Bauen, ein Partner für die Solarenergie</td></tr>
+    <tr><td><strong>Geltung, Prestige</strong></td><td>Exklusivität, ein spezielles Angebot, bevorzugte Behandlung</td></tr>
+  </table>
+
+  <div class="callout tip">
+    <strong>Zur Gewichtung.</strong> Im Praxistraining wurde – in Anlehnung an das Motivmodell von S. Reiss – folgende ungefähre Rangfolge diskutiert, wie stark diese Motive Kaufentscheidungen typischerweise beeinflussen: Geltung/Prestige, Kontaktstreben, Neugier/Wissen, Bequemlichkeit, Sicherheit, Geld/Gewinn (absteigend). Das ist eine grobe Trainings-Faustregel, kein gemessener Wert für Solarkunden — nützlich als Denkanstoss, nicht als exakte Statistik: <strong>der Preis ist selten das stärkste Kaufmotiv</strong>, auch wenn Kunden im Gespräch am häufigsten darüber sprechen.
+  </div>
+</section>
+
+<section id="argumentieren">
+  <h2><span class="num">07</span> Überzeugend argumentieren: das PLN-Modell</h2>
+  <p>Starke Argumente folgen immer derselben Brücke:</p>
+  <div class="funnel">
+    <div class="step"><b>P — Problem</b> — Kissen legen, dem Kunden sein Anliegen bewusst machen: "Ihnen geht es doch darum, dass …" / "Wie Sie mir sagten …" / "Sicher möchten auch Sie …"<small>Um was geht es ihm?</small></div>
+    <div class="step"><b>L — Lösung</b> — das passende Leistungsdetail nennen: Fakten, Produkt, Service, Angebotsdetail, Stärke der Firma<small>Womit lösen wir es?</small></div>
+    <div class="step"><b>N — Nutzen</b> — die Übergangsbrücke zum Vorteil für den Kunden schlagen<small>Was hat er davon?</small></div>
+  </div>
+
+  <h3>Formulierungsbausteine für die Übergangsbrücke</h3>
+  <p>Leistungsdetail + Brücke, z.B. <em>"Diese Solar-Lösung …"</em>:</p>
+  <div class="chips">
+    <span class="chip">bedeutet für Sie …</span>
+    <span class="chip">damit erreichen Sie …</span>
+    <span class="chip">erhöht Ihre …</span>
+    <span class="chip">senkt Ihre …</span>
+    <span class="chip">verschafft Ihnen …</span>
+    <span class="chip">Sie werden damit …</span>
+    <span class="chip">bringt Ihnen …</span>
+    <span class="chip">vergrössert Ihre …</span>
+    <span class="chip">daraus erkennen Sie …</span>
+    <span class="chip">gibt Ihnen …</span>
+    <span class="chip">spart Ihnen …</span>
+    <span class="chip">garantiert Ihnen …</span>
+  </div>
+  <p class="source-note">Wichtig: Die Argumentation muss an die vorher erfragten Kundeninteressen anknüpfen (Kapitel 5–6) — nicht an eine Standardliste von Produktmerkmalen.</p>
+</section>
+
+<section id="argumente">
+  <h2><span class="num">08</span> Unsere stärksten Argumente</h2>
+  <p>Im Praxistraining haben zwei Gruppen unabhängig voneinander mögliche Verkaufsargumente für Solarprodukte diskutiert, priorisiert — und bewusst auch Argumente verworfen. Die Ergebnisse direkt aus den Flipcharts:</p>
+
+  <h3>Ergebnis Gruppe A</h3>
+  <table>
+    <tr><th>Rang</th><th>Argument</th></tr>
+    <tr><td>1</td><td>Fachkompetenz</td></tr>
+    <tr><td>4</td><td>Lokale Verankerung</td></tr>
+    <tr><td>5</td><td>Hochwertige Produkte</td></tr>
+  </table>
+  <p>Diskutiert, aber nicht in die Top-Rangliste aufgenommen: Eigenverbrauch/Optimierung, zeitnahe Realisierung.<br>
+  <strong>Bewusst verworfen:</strong> langjährige Erfahrung, schlüsselfertige Anlage (als alleinstehende Argumente zu wenig differenzierend befunden).</p>
+
+  <h3>Ergebnis Gruppe B</h3>
+  <table>
+    <tr><th>Rang</th><th>Argument</th></tr>
+    <tr><td>2</td><td>Sorglos-Paket</td></tr>
+    <tr><td>3</td><td>Langjährige Erfahrung</td></tr>
+  </table>
+  <p>Diskutiert, aber nicht in die Top-Rangliste aufgenommen: Qualität, Komplettlösungen, Flexibilität, Qualitätsmanagement.<br>
+  <strong>Bewusst verworfen:</strong> Komponenten (Einzelteile), Regional (als alleinstehende Argumente zu wenig differenzierend befunden).</p>
+
+  <div class="callout tip">
+    <strong>Muster über beide Gruppen hinweg:</strong> Fachkompetenz, ein Sorglos-Rundum-Paket und nachweisbare Erfahrung schlagen reine Produkt- oder Herkunftsargumente ("schlüsselfertig", "regional", "Komponenten X"). Kunden kaufen weniger das Bauteil als das Vertrauen, dass jemand Kompetentes den ganzen Prozess verantwortet.
+  </div>
+</section>
+
+<section id="preis">
+  <h2><span class="num">09</span> Preisverhandlung: mit Spannung umgehen</h2>
+  <p>Zwischen dem, was der Kunde bereit ist zu zahlen, und dem, was du kalkulierst, entsteht eine Spannung. Diese Spannung ist normal und kein Zeichen eines gescheiterten Gesprächs.</p>
+  <div class="formula">Kunde (K) ── Spannung ── Verkäufer (V)</div>
+  <p><em>Illustratives Beispiel:</em> Bietet ein Kunde CHF 30'000 für ein Projekt, das mit CHF 35'000 kalkuliert ist, überbrücke die Spannung nicht mit sofortigem Nachgeben, sondern mit Argumentation (Kapitel 7–8): Was genau rechtfertigt die Differenz — Fachkompetenz, Sorglos-Paket, Garantieleistungen? Die Zahlen sind hier nur zur Veranschaulichung; im echten Gespräch bleibt die Kalkulation vertraulich.</p>
+  <p>Bleib dabei im "Alarmbereich" bewusst ruhig, gelassen und im eigenen Ton (Kapitel 2) — Nachgeben aus Unsicherheit untergräbt die eigene Argumentation.</p>
+</section>
+
+<section id="abschluss">
+  <h2><span class="num">10</span> Abschlusstechniken</h2>
+  <h3>Kaufsignale erkennen</h3>
+  <p>Vier von fünf Verkäufern achten laut Training nicht bewusst auf Kaufsignale. Fragen, Bemerkungen und Körpersprache zeigen, wie kaufbereit ein Kunde ist:</p>
+  <table>
+    <tr><th>Signal</th><th>Bedeutung</th><th>Beispiele</th></tr>
+    <tr><td><span class="traffic"><span class="dot red"></span> Rot</span></td><td>Warnlampe, ablehnend</td><td>"Wieso soll ich mich auf diese Konditionen einlassen?" · eng verschränkte Arme</td></tr>
+    <tr><td><span class="traffic"><span class="dot blue"></span> Blau</span></td><td>neutral, weder Zu- noch Ablehnung</td><td>"Hmmm, davon weiss ich nichts" · Kopf auf Hand gestützt</td></tr>
+    <tr><td><span class="traffic"><span class="dot green"></span> Grün</span></td><td>freie Fahrt, positiv gestimmt</td><td>"Diesen Betrag können wir investieren" · lebhafter Gesichtsausdruck, Körper nach vorne gebeugt</td></tr>
+  </table>
+
+  <h3>Direkter vs. indirekter Abschluss</h3>
+  <table>
+    <tr><th></th><th>Direkter Abschluss</th><th>Indirekter Abschluss</th></tr>
+    <tr><td><strong>Technik</strong></td><td>Geschlossene Frage — "Darf ich den Auftrag so bestätigen?"</td><td>Ja-Sammeln — mehrere kleine Zustimmungen vor dem eigentlichen Abschluss</td></tr>
+    <tr><td><strong>Regel</strong></td><td>Funktioniert praktisch immer, wenn genug Grün-Signale da sind</td><td>Am Schluss von <strong>jedem</strong> Gespräch anwenden — auch wenn (noch) kein Auftrag zustande kommt</td></tr>
+    <tr><td><strong>Wann zwingend</strong></td><td>Nach der Preisverhandlung, im Nachfassgespräch</td><td>Immer, als Gesprächsabschluss</td></tr>
+  </table>
+  <div class="callout tip">
+    <strong>Der letzte Eindruck ist bleibend.</strong> Auch ein Gespräch ohne Abschluss verdient einen sauberen, freundlichen Ausklang — er entscheidet mit, ob der Kunde später zurückkommt oder weiterempfiehlt.
+  </div>
+</section>
+
+<section id="checkliste">
+  <h2><span class="num">11</span> Praxis-Checkliste</h2>
+  <ol class="rules">
+    <li><strong>Vor dem Gespräch:</strong> SMART-Ziel setzen, Eröffnung aus einem der 4 Bereiche vorbereiten (Kapitel 4), Kundensituation recherchieren.</li>
+    <li><strong>Eröffnung:</strong> anders als alle anderen (AAAA), Freundlichkeit zeigen, dem Kunden Raum zur Gesprächseröffnung lassen.</li>
+    <li><strong>Analyse:</strong> öffnende Fragen stellen, Positives aufgreifen und vertiefen, Negatives liegen lassen, aussprechen lassen.</li>
+    <li><strong>Argumentation:</strong> Kissen legen (Problem), Leistungsdetail nennen (Lösung), Übergangsbrücke zum Nutzen schlagen — passend zum erfragten Motiv (Kapitel 6).</li>
+    <li><strong>Bei Preisdruck:</strong> Ruhe bewahren, mit Fachkompetenz statt mit Rabatt argumentieren.</li>
+    <li><strong>Abschluss:</strong> auf Kaufsignale achten (Ampel), bei Grün direkt abschliessen, sonst indirekt mit Ja-Sammeln sauber ausklingen lassen.</li>
+    <li><strong>Nach dem Gespräch:</strong> Nachfassgespräch terminieren, Zusagen einhalten — die Basis für die Weiterempfehlung.</li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="padding:0">
+    <p><strong style="color:var(--paper)">Verkaufsleitfaden für Fachberater Solar</strong><br>
+    Zusammengestellt von Patrick Biber · <a href="https://biber.solar">biber.solar</a> · <a href="mailto:patrick@biber.solar">patrick@biber.solar</a></p>
+    <p>Inhaltliche Grundlage: Trainingsskript "Solarprodukte überzeugend verkaufen können — Kundenberatung" von Roger Zosso, trainings-consult AG (<a href="https://www.zossotraining.ch" target="_blank" rel="nofollow noopener">zossotraining.ch</a>), sowie das Fotoprotokoll des dazugehörigen Praxistrainings, Bildungszentrum Polybau, Uzwil. Danke an Roger Zosso für das Training.</p>
+  </div>
+</footer>
+
+</body>
+</html>
