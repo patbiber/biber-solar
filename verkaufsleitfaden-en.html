@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Guide for Solar Consultants — biber.solar</title>
+<meta name="description" content="Practical sales guide for solar consultants: opening a conversation, needs analysis, customer motives, argumentation technique and closing.">
+<style>
+  :root{
+    --ink:#141410;
+    --paper:#FAFAF6;
+    --sun:#E8A20C;
+    --sun-deep:#B57D00;
+    --green:#1B5E3B;
+    --danger:#B33A2B;
+    --line:#D8D4C8;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    font-size:17px;
+  }
+  header{
+    background:var(--ink);
+    color:var(--paper);
+    padding:2.2rem 1.2rem 2.6rem;
+    border-bottom:6px solid var(--sun);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 1.2rem}
+  header .wrap{padding:0}
+  .kicker{
+    color:var(--sun);
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:.78rem;
+    font-weight:700;
+    margin:0 0 .6rem;
+  }
+  h1{
+    font-size:clamp(1.9rem,6vw,3rem);
+    line-height:1.12;
+    margin:0 0 .7rem;
+    font-weight:800;
+    letter-spacing:-.01em;
+  }
+  header p{max-width:34rem;margin:0;color:#CFCBBE}
+  nav{
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:10;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  nav .wrap{display:flex;gap:.2rem;padding:0 .6rem}
+  nav a{
+    color:var(--ink);
+    text-decoration:none;
+    padding:.75rem .7rem;
+    font-size:.85rem;
+    font-weight:600;
+    white-space:nowrap;
+    border-bottom:3px solid transparent;
+  }
+  nav a:hover,nav a:focus{border-bottom-color:var(--sun)}
+  main{padding:1rem 0 3rem}
+  section{padding:1.6rem 0;border-bottom:1px solid var(--line)}
+  h2{
+    font-size:1.5rem;
+    margin:.2rem 0 .8rem;
+    display:flex;align-items:baseline;gap:.6rem;
+    font-weight:800;
+  }
+  h2 .num{
+    color:var(--sun-deep);
+    font-size:.95rem;
+    font-weight:800;
+    letter-spacing:.1em;
+  }
+  h3{font-size:1.08rem;margin:1.3rem 0 .4rem;font-weight:700}
+  p{margin:.5rem 0}
+  ul,ol{margin:.4rem 0 .8rem;padding-left:1.3rem}
+  li{margin:.25rem 0}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:.8rem 0;
+    font-size:.92rem;
+    background:var(--card);
+  }
+  th,td{border:1px solid var(--line);padding:.45rem .6rem;text-align:left}
+  th{background:#F1EEE4;font-weight:700}
+  code,.formula{
+    font-family:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;
+    background:#F1EEE4;
+    padding:.08rem .35rem;
+    border-radius:4px;
+    font-size:.92em;
+  }
+  .formula{
+    display:block;
+    padding:.7rem .9rem;
+    margin:.6rem 0;
+    border-left:4px solid var(--sun);
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  .callout{
+    border:1px solid var(--line);
+    border-left:5px solid var(--green);
+    background:var(--card);
+    padding:.8rem 1rem;
+    margin:.9rem 0;
+    border-radius:0 6px 6px 0;
+  }
+  .callout.danger{border-left-color:var(--danger)}
+  .callout.danger strong{color:var(--danger)}
+  .callout.tip{border-left-color:var(--sun)}
+  .rules{counter-reset:rule;list-style:none;padding:0;margin:1rem 0}
+  .rules li{
+    counter-increment:rule;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:.8rem 1rem .8rem 3.2rem;
+    margin:.5rem 0;
+    position:relative;
+  }
+  .rules li::before{
+    content:counter(rule);
+    position:absolute;left:.9rem;top:.75rem;
+    width:1.7rem;height:1.7rem;
+    background:var(--sun);
+    color:var(--ink);
+    font-weight:800;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.95rem;
+  }
+  .quote{
+    font-style:italic;
+    border-left:4px solid var(--line);
+    padding:.4rem 0 .4rem 1rem;
+    margin:.8rem 0;
+    color:#4a4940;
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}
+  .chip{
+    background:#F1EEE4;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:.3rem .7rem;
+    font-size:.85rem;
+  }
+  .funnel{
+    display:grid;
+    gap:.5rem;
+    margin:1rem 0;
+  }
+  .funnel .step{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:10px;
+    padding:.8rem 1rem;
+  }
+  .funnel .step b{color:var(--sun)}
+  .funnel .step small{display:block;color:#CFCBBE;margin-top:.2rem}
+  .traffic{display:flex;gap:.4rem;align-items:center}
+  .dot{width:.8rem;height:.8rem;border-radius:50%;display:inline-block}
+  .dot.red{background:var(--danger)}
+  .dot.blue{background:#3B6FB3}
+  .dot.green{background:var(--green)}
+  .source-note{font-size:.8rem;color:#8a8878}
+  footer{
+    background:var(--ink);
+    color:#CFCBBE;
+    padding:1.6rem 1.2rem;
+    font-size:.88rem;
+  }
+  footer a{color:var(--sun)}
+  a{color:var(--green)}
+  :focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+  @media print{nav{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Sales Guide · Solar Consultants</p>
+    <h1>Selling solar convincingly.<br>From first contact to close.</h1>
+    <p>A practical guide for consultative sales conversations with solar customers: attitude, opening the conversation, needs analysis, argumentation and closing.</p>
+  </div>
+</header>
+
+<nav aria-label="Sections">
+  <div class="wrap">
+    <a href="#attitude">Attitude</a>
+    <a href="#impact">Impact</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#opening">Opening</a>
+    <a href="#discovery">Discovery</a>
+    <a href="#motives">Motives</a>
+    <a href="#arguing">Arguing</a>
+    <a href="#arguments">Our Arguments</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#closing">Closing</a>
+    <a href="#checklist">Checklist</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="attitude">
+  <h2><span class="num">01</span> Attitude and goal</h2>
+  <p>Selling doesn't begin in the conversation — it begins in your attitude before it. Four areas need constant attention, and <strong>you</strong> sit at the centre of all of them:</p>
+  <ul>
+    <li><strong>People</strong> — your relationship with customers, colleagues, partners</li>
+    <li><strong>Time and organisation</strong> — preparation, follow-up, structure in your day-to-day work</li>
+    <li><strong>Technical knowledge</strong> — the technical and commercial foundation no argument can do without</li>
+  </ul>
+
+  <div class="callout tip">
+    <strong>Success = goal achieved.</strong> No goal, no success. Before you walk into a consultation or a price negotiation, set yourself a <strong>SMART</strong> goal:
+    <ul>
+      <li><strong>S</strong>pecific</li>
+      <li><strong>M</strong>easurable</li>
+      <li><strong>A</strong>mbitious</li>
+      <li><strong>R</strong>ealistic</li>
+      <li><strong>T</strong>ime-bound</li>
+      <li>and framed <strong>positively</strong></li>
+    </ul>
+  </div>
+
+  <p>Two attitudes the hands-on workshop singled out as central:</p>
+  <div class="callout">
+    <strong>The courage to take risks.</strong> Selling means exposing yourself to contact — the highs (satisfaction) and the lows (setbacks) alike. Whoever avoids contact to dodge the risk of a "no" also gives up the chance of a "yes".
+  </div>
+  <div class="callout">
+    <strong>Turn customers into fans.</strong> The real goal of a good conversation isn't just the individual sale — it's the <strong>active, voluntary referral</strong> that follows. Whoever becomes a fan keeps selling for you.
+  </div>
+</section>
+
+<section id="impact">
+  <h2><span class="num">02</span> Your personal impact</h2>
+  <p>One point stood out in the workshop: <strong>your personal impact is decisive</strong> — more so than technical knowledge on its own. The <strong>SCIL model</strong> breaks it down:</p>
+  <table>
+    <tr><th>Impact</th><th>Means</th></tr>
+    <tr><td><strong>Sensus</strong></td><td>Emotional impact — what does your presence trigger in the customer?</td></tr>
+    <tr><td><strong>Corpus</strong></td><td>Physical impact — posture, gestures, facial expression, eye contact</td></tr>
+    <tr><td><strong>Intellectus</strong></td><td>Intellectual impact — expertise, clarity of your arguments</td></tr>
+    <tr><td><strong>Lingua</strong></td><td>Verbal impact — word choice, tone, phrasing</td></tr>
+  </table>
+
+  <h3>Building rapport</h3>
+  <p>Before content can convince anyone, the connection with the person across from you has to be right. Pay conscious attention to:</p>
+  <div class="chips">
+    <span class="chip">Posture</span>
+    <span class="chip">Gestures</span>
+    <span class="chip">Facial expression</span>
+    <span class="chip">Eye contact</span>
+    <span class="chip">Voice</span>
+    <span class="chip">Feeling</span>
+  </div>
+  <p>And in the "red zone" — when things get tense (price negotiation, objections, conflict) — hold on to your <strong>own tone, calm and composure</strong>, and let your <strong>expertise</strong> show. According to the workshop, that's exactly what separates a good salesperson from a mediocre one.</p>
+
+  <div class="quote">
+    "I bow to no one, and no one has to bow to me. We are all equals." — quoted in the sales training
+  </div>
+  <p>A negotiation isn't about beating the other side, and it isn't about losing to them either. It's about having a good conversation that ends with both sides able to say: <em>"That was worth it!"</em></p>
+
+  <div class="callout">
+    <strong>Good salespeople can handle tension.</strong> Between what the customer wants to pay and what you've calculated, there's almost always tension. That's normal — it's part of the process. Sit with it instead of caving in too soon or pretending it isn't there. More on this under <a href="#pricing">Pricing</a>.
+  </div>
+</section>
+
+<section id="roadmap">
+  <h2><span class="num">03</span> The conversation roadmap</h2>
+  <p>Every sales conversation moves through four phases from first contact to yes-or-no — like a funnel narrowing toward a decision:</p>
+  <div class="funnel">
+    <div class="step"><b>1. Opening</b> — earn attention, "different from everyone else"<small>see chapter 4</small></div>
+    <div class="step"><b>2. Discovery</b> — open questions, understand the need<small>see chapters 5–6</small></div>
+    <div class="step"><b>3. Argumentation</b> — Problem, Solution, Benefit (PSB)<small>see chapters 7–8</small></div>
+    <div class="step"><b>4. Closing</b> — read buying signals, guide to a yes<small>see chapter 10</small></div>
+  </div>
+  <p class="source-note">The need you're addressing is always aligned strategically with the person — not just with the product.</p>
+</section>
+
+<section id="opening">
+  <h2><span class="num">04</span> Opening the conversation</h2>
+  <p>The goal of the opening: earn attention, win the customer's engagement, build the connection. Good opening lines come from four areas:</p>
+  <table>
+    <tr><th>Area</th><th>Examples</th></tr>
+    <tr><td><strong>General situation</strong></td><td>Price trends, the market and regulatory situation, subsidy programmes</td></tr>
+    <tr><td><strong>The customer's situation</strong></td><td>Building projects, renovations, structural changes, their current electricity bill</td></tr>
+    <tr><td><strong>Your own situation</strong></td><td>Reference projects, awards, new services, cost comparisons</td></tr>
+    <tr><td><strong>Your own offer</strong></td><td>New modules/batteries, product additions, current terms</td></tr>
+  </table>
+  <div class="callout tip">
+    <strong>Remember:</strong> Open the conversation <strong>differently from everyone else.</strong> Whoever starts with the same line as every other salesperson has already given away the first chance to be noticed.
+  </div>
+</section>
+
+<section id="discovery">
+  <h2><span class="num">05</span> Needs analysis</h2>
+  <h3>Open vs. closed questions</h3>
+  <table>
+    <tr><th>Type</th><th>How to spot it</th><th>When to use it</th><th>Examples</th></tr>
+    <tr>
+      <td><strong>Open question</strong></td>
+      <td>starts with a question word (what, how, where, which …)</td>
+      <td>mostly at the start of a conversation — forces a detailed answer</td>
+      <td>"What exactly are you looking for?" · "What do you expect from your system?"</td>
+    </tr>
+    <tr>
+      <td><strong>Closed question</strong></td>
+      <td>starts with a verb, answer is yes/no</td>
+      <td>to close out a phase of the conversation or confirm something</td>
+      <td>"If I understand correctly, that matters more to you?" · "May I note that down?"</td>
+    </tr>
+  </table>
+
+  <h3>Building on the positive — the strawberry method</h3>
+  <p>Look closely, pick up every positive signal, and keep digging in the same spot — like picking strawberries in the forest. The customer says: <em>"I think your offer is basically good."</em> You pick it up: <em>"You think the offer is basically good — what do you like about it specifically?"</em></p>
+
+  <h3>Letting the negative lie</h3>
+  <ul>
+    <li><strong>Let it pass:</strong> customer says "The product would be useful, but I don't like the colour" → you respond only to "useful".</li>
+    <li><strong>Agree, then dig back into the positive:</strong> "You're right — and does the performance otherwise match what you're looking for?"</li>
+  </ul>
+  <div class="callout danger">
+    <strong>Don't argue it away.</strong> A rust spot is a rust spot. Hours of debate only cement the negative more firmly in the customer's memory.
+  </div>
+
+  <h3>Keep searching if nothing turns up</h3>
+  <p>No luck in one spot → change the subject, ask in the opposite direction: "I pictured this differently." → "How did you picture it?" If the customer keeps circling back to the same negative point, switch to a question that's about them personally — that's what people are most interested in, after all.</p>
+
+  <h3>Listen and let them finish</h3>
+  <p>People tend to mention the minor stuff first and get to what really matters later. Let the customer finish speaking, then wait another second or two before you respond — that's often exactly when the crucial detail comes out.</p>
+
+  <h3>Justify your questions</h3>
+  <p>An unexplained question can feel intrusive. <em>"Which months bring in your highest income?"</em> sounds nosy. <em>"I'm only asking because I'd like to work out payment terms that suit you"</em> makes the very same question welcome.</p>
+</section>
+
+<section id="motives">
+  <h2><span class="num">06</span> Understanding customer motives</h2>
+  <p>What does the customer actually care about? Six motive categories, with typical solar examples from practice:</p>
+  <table>
+    <tr><th>Motive</th><th>Examples in solar sales</th></tr>
+    <tr><td><strong>Money, profit</strong></td><td>Make a sound investment, cut heating costs, get a good deal</td></tr>
+    <tr><td><strong>Security</strong></td><td>Being able to rely on it, raising the quality of the house, supply security</td></tr>
+    <tr><td><strong>Convenience</strong></td><td>Everything from one provider, not having to worry about anything, a smooth installation</td></tr>
+    <tr><td><strong>Curiosity, knowledge</strong></td><td>New technology on the house, using sustainable energy, trying something new</td></tr>
+    <tr><td><strong>Social connection</strong></td><td>A pleasant working relationship, enjoying the build, a partner for the long run</td></tr>
+    <tr><td><strong>Status, prestige</strong></td><td>Exclusivity, a special offer, preferential treatment</td></tr>
+  </table>
+
+  <div class="callout tip">
+    <strong>On weighting these.</strong> Drawing on S. Reiss's model of human motives, the workshop discussed a rough order of how strongly these motives typically drive buying decisions: status/prestige, social connection, curiosity/knowledge, convenience, security, money/profit (descending). Treat this as a rough rule of thumb from the training, not a measured statistic for solar sales — useful as food for thought, not as hard data: <strong>price is rarely the strongest buying motive</strong>, even though it's what customers talk about most.
+  </div>
+</section>
+
+<section id="arguing">
+  <h2><span class="num">07</span> Arguing convincingly: the PSB model</h2>
+  <p>Strong arguments always follow the same bridge:</p>
+  <div class="funnel">
+    <div class="step"><b>P — Problem</b> — name the underlying need so the customer becomes aware of it: "What matters to you here is that …" / "As you told me …" / "You'd surely also like …"<small>What's really at stake for them?</small></div>
+    <div class="step"><b>S — Solution</b> — name the matching detail: a fact, a product, a service, an offer detail, a strength of the company<small>What solves it?</small></div>
+    <div class="step"><b>B — Benefit</b> — build the bridge to what's in it for the customer<small>What do they get out of it?</small></div>
+  </div>
+
+  <h3>Phrases for building the benefit bridge</h3>
+  <p>Detail + bridge, e.g. <em>"This solar solution …"</em>:</p>
+  <div class="chips">
+    <span class="chip">means for you …</span>
+    <span class="chip">gets you …</span>
+    <span class="chip">increases your …</span>
+    <span class="chip">lowers your …</span>
+    <span class="chip">gives you …</span>
+    <span class="chip">you'll end up with …</span>
+    <span class="chip">brings you …</span>
+    <span class="chip">grows your …</span>
+    <span class="chip">shows you …</span>
+    <span class="chip">provides you …</span>
+    <span class="chip">saves you …</span>
+    <span class="chip">guarantees you …</span>
+  </div>
+  <p class="source-note">Important: the argument has to connect back to the interests you uncovered earlier (chapters 5–6) — not to a generic list of product features.</p>
+</section>
+
+<section id="arguments">
+  <h2><span class="num">08</span> Our strongest arguments</h2>
+  <p>In the hands-on workshop, several groups independently discussed and ranked possible sales arguments for solar products — and deliberately discarded some, too. The clearest, best-reasoned ranking came from one of the groups and is summarised here:</p>
+
+  <table>
+    <tr><th>Rank</th><th>Argument</th></tr>
+    <tr><td>1</td><td>Technical expertise</td></tr>
+    <tr><td>4</td><td>Local presence</td></tr>
+    <tr><td>5</td><td>High-quality products</td></tr>
+  </table>
+  <p class="source-note">Ranks 2 and 3 weren't clearly assigned by this group.</p>
+  <p>Discussed but not carried into the top ranking: self-consumption/optimisation, fast turnaround.<br>
+  <strong>Deliberately discarded:</strong> years of experience, turnkey systems — judged too generic to stand as arguments on their own.</p>
+
+  <div class="callout tip">
+    <strong>Takeaway:</strong> Technical expertise beats plain product or provenance arguments ("turnkey", "X years of experience"). Customers buy less of the hardware and more the confidence that someone competent is accountable for the whole process.
+  </div>
+</section>
+
+<section id="pricing">
+  <h2><span class="num">09</span> Price negotiation: handling tension</h2>
+  <p>Between what the customer is willing to pay and what you've calculated, tension builds up. That tension is normal — it isn't a sign the conversation has failed.</p>
+  <div class="formula">Customer (C) ── tension ── Salesperson (S)</div>
+  <p><em>Illustrative example:</em> if a customer offers CHF 30,000 for a project calculated at CHF 35,000, don't bridge the gap by caving in right away — bridge it with argumentation (chapters 7–8): what exactly justifies the difference — expertise, a worry-free package, warranty terms? The figures here are purely illustrative; in a real conversation, your actual calculation stays confidential.</p>
+  <p>Stay in the "red zone" deliberately calm, composed, and in your own tone (chapter 2) — caving in out of insecurity undermines your own argument.</p>
+</section>
+
+<section id="closing">
+  <h2><span class="num">10</span> Closing techniques</h2>
+  <h3>Reading buying signals</h3>
+  <p>According to the training, four out of five salespeople don't consciously watch for buying signals. Questions, remarks and body language show how ready to buy a customer is:</p>
+  <table>
+    <tr><th>Signal</th><th>Meaning</th><th>Examples</th></tr>
+    <tr><td><span class="traffic"><span class="dot red"></span> Red</span></td><td>warning light, resistant</td><td>"Why would I agree to these terms?" · arms tightly crossed</td></tr>
+    <tr><td><span class="traffic"><span class="dot blue"></span> Blue</span></td><td>neutral, neither for nor against</td><td>"Hmm, I don't know anything about that" · head resting on hand</td></tr>
+    <tr><td><span class="traffic"><span class="dot green"></span> Green</span></td><td>green light, positively inclined</td><td>"That's an amount we could invest" · animated expression, leaning forward</td></tr>
+  </table>
+
+  <h3>Direct vs. indirect close</h3>
+  <table>
+    <tr><th></th><th>Direct close</th><th>Indirect close</th></tr>
+    <tr><td><strong>Technique</strong></td><td>A closed question — "May I confirm the order on that basis?"</td><td>Collecting small "yeses" — several small confirmations before the actual close</td></tr>
+    <tr><td><strong>Rule</strong></td><td>Works almost every time, once there are enough green signals</td><td>Use at the end of <strong>every</strong> conversation — even when no order results (yet)</td></tr>
+    <tr><td><strong>When it's mandatory</strong></td><td>After a price negotiation, in the follow-up call</td><td>Always, as the way you end the conversation</td></tr>
+  </table>
+  <div class="callout tip">
+    <strong>The last impression sticks.</strong> Even a conversation without a close deserves a clean, friendly ending — it helps decide whether the customer comes back later or refers you on.
+  </div>
+</section>
+
+<section id="checklist">
+  <h2><span class="num">11</span> Practice checklist</h2>
+  <ol class="rules">
+    <li><strong>Before the conversation:</strong> set a SMART goal, prepare an opening from one of the 4 areas (chapter 4), research the customer's situation.</li>
+    <li><strong>Opening:</strong> different from everyone else, show genuine friendliness, leave the customer room to open the conversation.</li>
+    <li><strong>Discovery:</strong> ask open questions, build on the positive, let the negative lie, let them finish speaking.</li>
+    <li><strong>Argumentation:</strong> name the need (Problem), name the matching detail (Solution), build the bridge to the benefit — matched to the motive you uncovered (chapter 6).</li>
+    <li><strong>Under price pressure:</strong> stay calm, argue with expertise rather than with a discount.</li>
+    <li><strong>Closing:</strong> watch for buying signals (traffic light), close directly on green, otherwise close indirectly with a clean, collected "yes".</li>
+    <li><strong>After the conversation:</strong> schedule the follow-up, keep every promise — that's what referrals are built on.</li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="padding:0">
+    <p><strong style="color:var(--paper)">Sales guide for solar consultants</strong><br>
+    Compiled by Patrick Biber · <a href="https://biber.solar">biber.solar</a> · <a href="mailto:patrick@biber.solar">patrick@biber.solar</a></p>
+    <p>Also available in <a href="verkaufsleitfaden.html">German</a>.</p>
+    <p>Content basis: the training script "Solarprodukte überzeugend verkaufen können — Kundenberatung" ("Selling solar products convincingly — customer consultation") by Roger Zosso, trainings-consult AG (<a href="https://www.zossotraining.ch" target="_blank" rel="nofollow noopener">zossotraining.ch</a>), and the photographed flipchart record of the accompanying hands-on workshop, Bildungszentrum Polybau, Uzwil (Switzerland). Freely translated and adapted from the German original. Thanks to Roger Zosso for the training.</p>
+  </div>
+</footer>
+
+</body>
+</html>
