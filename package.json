@@ -2,13 +2,6 @@
   "name": "biber-solar",
   "private": true,
   "scripts": {
-    "test": "node --test",
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "axios": "^1.7.7",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "rss-parser": "^3.13.0"
+    "test": "node --test"
   }
 }

@@ -37,10 +37,6 @@ h1 {
     float: right;
 }
 
-.bot img {
-    width: 250px;
-}
-
 .products img {
     width: 100%;
 }
@@ -82,47 +78,6 @@ h1 {
     text-decoration: underline;
 }
 
-#chatbot {
-    background-color: #333;
-    border: 2px solid #ffc107;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 800px;
-    color: #fff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    text-align: left;
-}
-
-#chatbot-messages {
-    height: 300px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #444;
-}
-
-#chatbot-input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    margin-bottom: 10px;
-}
-
-#chatbot-send {
-    padding: 10px 20px;
-    background-color: #ffc107;
-    border: none;
-    color: #000;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#chatbot-send:hover {
-    background-color: #ffda42;
-}
-
 @media only screen and (max-width: 700px) {
     .logo {
         float: right;
@@ -135,7 +90,4 @@ h1 {
     .cool-title {
         font-size: 36px;
     }
-
-    #chatbot-input {
-    font-size: 25px;
 }
