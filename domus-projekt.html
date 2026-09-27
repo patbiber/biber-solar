@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projektdokumentation Domus — biber.solar</title>
+<meta name="description" content="Technische Projektdokumentation von Domus: Home Assistant, Photovoltaik-Monitoring und eine Retro-Adventure-Webseite auf einem Intel NUC zu Hause.">
+<style>
+  :root{
+    --ink:#141410;
+    --paper:#FAFAF6;
+    --sun:#E8A20C;
+    --sun-deep:#B57D00;
+    --green:#1B5E3B;
+    --danger:#B33A2B;
+    --line:#D8D4C8;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    font-size:17px;
+  }
+  header{
+    background:var(--ink);
+    color:var(--paper);
+    padding:2.2rem 1.2rem 2.6rem;
+    border-bottom:6px solid var(--sun);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 1.2rem}
+  header .wrap{padding:0}
+  .kicker{
+    color:var(--sun);
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:.78rem;
+    font-weight:700;
+    margin:0 0 .6rem;
+  }
+  h1{
+    font-size:clamp(1.9rem,6vw,3rem);
+    line-height:1.12;
+    margin:0 0 .7rem;
+    font-weight:800;
+    letter-spacing:-.01em;
+  }
+  header p{max-width:34rem;margin:0;color:#CFCBBE}
+  nav{
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:10;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  nav .wrap{display:flex;gap:.2rem;padding:0 .6rem}
+  nav a{
+    color:var(--ink);
+    text-decoration:none;
+    padding:.75rem .7rem;
+    font-size:.85rem;
+    font-weight:600;
+    white-space:nowrap;
+    border-bottom:3px solid transparent;
+  }
+  nav a:hover,nav a:focus{border-bottom-color:var(--sun)}
+  main{padding:1rem 0 3rem}
+  section{padding:1.6rem 0;border-bottom:1px solid var(--line)}
+  h2{
+    font-size:1.5rem;
+    margin:.2rem 0 .8rem;
+    display:flex;align-items:baseline;gap:.6rem;
+    font-weight:800;
+  }
+  h2 .num{
+    color:var(--sun-deep);
+    font-size:.95rem;
+    font-weight:800;
+    letter-spacing:.1em;
+  }
+  h3{font-size:1.08rem;margin:1.3rem 0 .4rem;font-weight:700}
+  p{margin:.5rem 0}
+  ul,ol{margin:.4rem 0 .8rem;padding-left:1.3rem}
+  li{margin:.25rem 0}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:.8rem 0;
+    font-size:.92rem;
+    background:var(--card);
+  }
+  th,td{border:1px solid var(--line);padding:.45rem .6rem;text-align:left}
+  th{background:#F1EEE4;font-weight:700}
+  code,.formula{
+    font-family:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;
+    background:#F1EEE4;
+    padding:.08rem .35rem;
+    border-radius:4px;
+    font-size:.92em;
+  }
+  pre{
+    background:var(--ink);
+    color:var(--paper);
+    padding:.9rem 1rem;
+    border-radius:8px;
+    overflow-x:auto;
+    font-size:.85rem;
+    line-height:1.5;
+  }
+  pre code{background:none;padding:0;color:inherit}
+  .callout{
+    border:1px solid var(--line);
+    border-left:5px solid var(--green);
+    background:var(--card);
+    padding:.8rem 1rem;
+    margin:.9rem 0;
+    border-radius:0 6px 6px 0;
+  }
+  .callout.danger{border-left-color:var(--danger)}
+  .callout.danger strong{color:var(--danger)}
+  .callout.tip{border-left-color:var(--sun)}
+  .flow{
+    display:grid;
+    gap:.5rem;
+    margin:1rem 0;
+  }
+  .flow .step{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:10px;
+    padding:.8rem 1rem;
+  }
+  .flow .step b{color:var(--sun)}
+  .flow .step small{display:block;color:#CFCBBE;margin-top:.2rem}
+  .flow .arrow{
+    text-align:center;
+    color:#8a8878;
+    font-size:.85rem;
+  }
+  .source-note{font-size:.8rem;color:#8a8878}
+  footer{
+    background:var(--ink);
+    color:#CFCBBE;
+    padding:1.6rem 1.2rem;
+    font-size:.88rem;
+  }
+  footer a{color:var(--sun)}
+  a{color:var(--green)}
+  :focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+  @media print{nav{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Projektdokumentation · Domus</p>
+    <h1>Ein Home Assistant NUC, der auch Buchhaltung kann.</h1>
+    <p>Technische Doku zum Domus-Projekt: Hausautomation, Photovoltaik-Monitoring, Strompreise und die Retro-Adventure-Webseite dahinter. Von <a href="https://biber.solar" style="color:var(--sun)">biber.solar</a>.</p>
+  </div>
+</header>
+
+<nav aria-label="Sections">
+  <div class="wrap">
+    <a href="#ziele">Ziele</a>
+    <a href="#hardware">Hardware</a>
+    <a href="#architektur">Architektur</a>
+    <a href="#komponenten">Komponenten</a>
+    <a href="#sicherheit">Sicherheit</a>
+    <a href="#betrieb">Betrieb</a>
+    <a href="#verlauf">Verlauf</a>
+    <a href="#offen">Offene Punkte</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="ziele">
+  <h2><span class="num">01</span> Ziele</h2>
+  <p>Domus ist ein Home-System für ein Haus in Stäfa. Es läuft auf einem kleinen Intel NUC mit Ubuntu Server und bündelt Hausautomation, Photovoltaik-Monitoring, Strompreise und Benachrichtigungen an einem Ort. Die gesamte Konfiguration liegt versioniert im Git-Repository <code>patbiber/domus</code>; Geheimnisse und Betriebsdaten bleiben lokal.</p>
+  <ul>
+    <li><strong>Ein zentrales System</strong> für das Haus statt vieler Hersteller-Apps: Home Assistant als Herzstück.</li>
+    <li><strong>Energie verstehen:</strong> Was produziert die Solaranlage, was verbraucht das Haus, was kostet oder bringt das gerade?</li>
+    <li><strong>Nachvollziehbar und reproduzierbar:</strong> Jeder Dienst in einem eigenen Ordner mit eigener <code>compose.yml</code>, jede Änderung als Git-Commit mit deutscher Commit-Message.</li>
+    <li><strong>Sicher:</strong> Keine Secrets im Repo, keine Portfreigaben ohne bewusste Entscheidung, Backups vor jeder Änderung an Home Assistant.</li>
+  </ul>
+</section>
+
+<section id="hardware">
+  <h2><span class="num">02</span> Hardware und Grundsystem</h2>
+  <table>
+    <tr><th>Komponente</th><th>Details</th></tr>
+    <tr><td>Rechner</td><td>Intel NUC, Intel Core i3-4010U, 7 GB RAM</td></tr>
+    <tr><td>Betriebssystem</td><td>Ubuntu Server 26.04 LTS</td></tr>
+    <tr><td>Container</td><td>Docker mit Docker Compose</td></tr>
+    <tr><td>Zeitzone</td><td><code>Europe/Zurich</code></td></tr>
+    <tr><td>DNS</td><td>Cloudflare <code>1.1.1.1</code> / <code>1.0.0.1</code> (per Netplan statt Router)</td></tr>
+    <tr><td>Netzwerk</td><td><code>eno1</code> mit DHCP-Adresse und zusätzlicher statischer IP</td></tr>
+  </table>
+
+  <h3>Geräte im Haus</h3>
+  <table>
+    <tr><th>Gerät</th><th>Anbindung</th></tr>
+    <tr><td>Fronius-Wechselrichter (Datamanager, Solar API v1)</td><td>HTTP im LAN, nur tagsüber erreichbar</td></tr>
+    <tr><td>Fronius Smart Meter TS 65A-3</td><td>über den Wechselrichter, Einbauort Verbrauchszweig</td></tr>
+  </table>
+</section>
+
+<section id="architektur">
+  <h2><span class="num">03</span> Architektur</h2>
+  <p>Ein Router leitet die Ports 80/443 an den NUC weiter. Dort verteilt nginx die beiden öffentlichen Hostnamen an Home Assistant bzw. den Energie-Dienst; der Energie-Dienst wiederum fragt den Fronius-Wechselrichter im LAN ab und holt sich einmal im Monat die aktuellen Stromtarife von den Gemeindewerken Stäfa (GWS).</p>
+  <div class="flow">
+    <div class="step"><b>Internet</b> → Router (Portfreigabe 80/443)<small>einziger öffentlicher Einstiegspunkt</small></div>
+    <div class="step"><b>nginx</b> auf dem NUC, TLS via Let's Encrypt<small>domus.biber.solar → Home Assistant · home.biber.solar → Energie-Dienst</small></div>
+    <div class="step"><b>Home Assistant</b> ↔ <b>Energie-Dienst</b> (REST-Sensoren)<small>Energie-Dienst fragt alle 5 s den Fronius-Wechselrichter im LAN ab</small></div>
+    <div class="step"><b>Tarifarchiv</b> holt monatlich die Tarife von gws.ch<small>fliesst in die Strompreis-Berechnung des Energie-Diensts ein</small></div>
+  </div>
+  <p class="source-note">Daneben laufen auf dem NUC noch der Mailversand (msmtp → Proton SMTP) und eine dauerhafte Claude-Code-Session mit Remote Control.</p>
+
+  <h3>Dienste</h3>
+  <table>
+    <tr><th>Ordner</th><th>Dienst</th><th>Erreichbar</th></tr>
+    <tr><td><code>homeassistant/</code></td><td>Home Assistant (stable)</td><td>https://domus.biber.solar</td></tr>
+    <tr><td><code>proxy/</code></td><td>nginx + certbot (Let's Encrypt)</td><td>Ports 80/443</td></tr>
+    <tr><td><code>energie/</code></td><td>Energie-API und Retro-Webseite</td><td>https://home.biber.solar</td></tr>
+    <tr><td><code>strompreise/</code></td><td>Monatliches Archiv der GWS-Stromtarife</td><td>–</td></tr>
+    <tr><td><code>claude-remote/</code></td><td>Dauerhafte Claude-Code-Session</td><td>claude.ai/code, Claude-App</td></tr>
+  </table>
+  <p class="source-note">Geplant: MQTT (<code>mosquitto/</code>), Zigbee2MQTT (Zigbee-Stick folgt), Philips Hue über die Hue Bridge.</p>
+</section>
+
+<section id="komponenten">
+  <h2><span class="num">04</span> Komponenten im Detail</h2>
+
+  <h3>Home Assistant</h3>
+  <ul>
+    <li>Container <code>ghcr.io/home-assistant/home-assistant:stable</code>, Konfiguration versioniert (Betriebsdaten per <code>.gitignore</code> ausgeschlossen).</li>
+    <li>Zugriff von aussen über nginx, mit IP-Sperre nach 5 Fehlversuchen.</li>
+    <li>2-Faktor-Login (TOTP) für alle Benutzer.</li>
+    <li>SMTP-Benachrichtigungen über Proton SMTP.</li>
+  </ul>
+  <p>Energie-Sensoren, die per REST vom Energie-Dienst gefüttert werden:</p>
+  <table>
+    <tr><th>Entität</th><th>Einheit</th><th>Bedeutung</th></tr>
+    <tr><td><code>sensor.strompreis_bezug</code></td><td>CHF/kWh</td><td>aktueller Bezugspreis inkl. MWST</td></tr>
+    <tr><td><code>sensor.ruckliefervergutung</code></td><td>CHF/kWh</td><td>aktuelle Rückliefervergütung (Sommer/Winter)</td></tr>
+    <tr><td><code>sensor.stromkosten_aktuell</code></td><td>CHF/h</td><td>was der Netzbezug gerade kostet</td></tr>
+    <tr><td><code>sensor.einspeiseerlos_aktuell</code></td><td>CHF/h</td><td>was die Einspeisung gerade bringt</td></tr>
+  </table>
+
+  <h3>Reverse Proxy und Zertifikate</h3>
+  <p>nginx terminiert TLS für beide Hostnamen. Unbekannte Hostnamen und direkte IP-Zugriffe werden verworfen. certbot prüft alle 12 h die Erneuerung, nginx lädt alle 6 h neu. <code>home.biber.solar</code> erlaubt nur GET/HEAD, hat ein Rate-Limit auf <code>/api/</code> und eine strenge Content-Security-Policy.</p>
+
+  <h3>Tarifarchiv GWS</h3>
+  <p>Ein systemd-Timer lädt jeden Monatsersten die maschinenlesbaren Tarife und alle Tarif-PDFs der Gemeindewerke Stäfa herunter, mit Prüfsummen und Quellenangabe archiviert. Bei geänderten Dateien oder Fehlern kommt automatisch eine E-Mail.</p>
+
+  <h3>Energie-Dienst</h3>
+  <ul>
+    <li>Reines Python (Standardbibliothek), fragt alle 5 Sekunden den Fronius-Wechselrichter ab.</li>
+    <li>Berechnet den aktuellen Strompreis aus den archivierten GWS-Tarifen (Gemeindeabgabe, MWST, Rückliefervergütung).</li>
+    <li>Endpunkte: <code>/api/status</code> (live) und <code>/api/history</code> (Minutenwerte der letzten 24 h, nur im Speicher).</li>
+    <li>Nachts ist der Wechselrichter aus – die API meldet das sauber statt einen Fehler zu werfen.</li>
+  </ul>
+
+  <h3 id="retro-website">Die Retro-Webseite home.biber.solar</h3>
+  <p>Eine Live-Ansicht im Stil der klassischen SCUMM-Adventures der 80er-Jahre – Details und Screenshot dazu im <a href="index.html#Domus">Blogartikel</a>. Technisch: eine einzige HTML-Datei ohne externe Ressourcen, die live vom Energie-Dienst gefüttert wird.</p>
+
+  <h3>E-Mail-Versand</h3>
+  <p><code>msmtp</code> als <code>sendmail</code>-Ersatz auf dem Host, Konfiguration mit restriktiven Dateirechten. Alle lokalen Systemmails landen automatisch bei <code>patrick@biber.solar</code>.</p>
+
+  <h3>Claude Code Remote Control</h3>
+  <p>Eine dauerhafte Claude-Code-Session läuft als systemd-User-Dienst und lässt sich über claude.ai/code oder die Claude-App fernsteuern. Feste Arbeitsregeln: deutsch antworten und committen, keine Secrets, keine Portfreigaben ohne Rückfrage, keine Datenträger formatieren, Backup vor Änderungen an Home Assistant.</p>
+</section>
+
+<section id="sicherheit">
+  <h2><span class="num">05</span> Sicherheit und Datenschutz</h2>
+  <table>
+    <tr><th>Thema</th><th>Umsetzung</th></tr>
+    <tr><td>Secrets</td><td>Nur eine Beispieldatei im Repo; echte Zugangsdaten bleiben lokal</td></tr>
+    <tr><td>Betriebsdaten</td><td>Home-Assistant-Konfiguration, Tarifarchiv und Backups per <code>.gitignore</code> ausgeschlossen</td></tr>
+    <tr><td>Öffentliche Ports</td><td>Nur 80/443; alle anderen Dienste nur im LAN erreichbar</td></tr>
+    <tr><td>Home Assistant</td><td>TLS, IP-Sperre nach Fehlversuchen, 2-Faktor-Login</td></tr>
+    <tr><td>Energie-Seite</td><td>Nur lesend, Rate-Limit, Content-Security-Policy</td></tr>
+  </table>
+  <div class="callout tip">
+    <strong>Bewusst öffentlich:</strong> home.biber.solar zeigt Live-Verbrauchsdaten des Hauses – das ist Absicht (der ganze Witz am Retro-Adventure), aber eine bewusste Entscheidung, kein Versehen.
+  </div>
+</section>
+
+<section id="betrieb">
+  <h2><span class="num">06</span> Betrieb</h2>
+  <pre><code># Dienst starten / aktualisieren (vorher Backup bei Home Assistant!)
+cd &lt;dienst&gt; &amp;&amp; docker compose pull &amp;&amp; docker compose up -d
+
+# Backup Home Assistant
+tar czf backups/homeassistant-$(date +%F-%H%M).tar.gz -C homeassistant config
+
+# Tarife sofort abrufen, Timer ansehen
+systemctl --user start strompreise.service
+systemctl --user list-timers
+
+# Energie-API prüfen
+curl -s http://127.0.0.1:8099/api/status | jq</code></pre>
+</section>
+
+<section id="verlauf">
+  <h2><span class="num">07</span> Projektverlauf</h2>
+  <table>
+    <tr><th>Datum</th><th>Meilenstein</th></tr>
+    <tr><td>26.09.2026</td><td>Grundstruktur, Home Assistant, DNS, Zeitzone, Netzwerk</td></tr>
+    <tr><td>26.09.2026</td><td>nginx + Let's Encrypt, domus.biber.solar</td></tr>
+    <tr><td>26.09.2026</td><td>Claude Code Remote Control als dauerhafter Dienst</td></tr>
+    <tr><td>27.09.2026</td><td>Fronius-Wechselrichter und Smart Meter gefunden und dokumentiert</td></tr>
+    <tr><td>27.09.2026</td><td>E-Mail-Versand über Proton SMTP</td></tr>
+    <tr><td>27.09.2026</td><td>Monatliches Archiv der GWS-Stromtarife</td></tr>
+    <tr><td>27.09.2026</td><td>Energie-Dienst, Strompreis-Sensoren, Retro-Webseite home.biber.solar</td></tr>
+  </table>
+</section>
+
+<section id="offen">
+  <h2><span class="num">08</span> Offene Punkte</h2>
+  <ul>
+    <li>Fronius-Integration direkt in Home Assistant einrichten.</li>
+    <li>Energie-Dashboard mit den neuen Strompreis-Sensoren aufsetzen.</li>
+    <li>Rückliefervergütung 2027 nachtragen, sobald die GWS sie veröffentlicht.</li>
+    <li>Entscheiden, ob home.biber.solar öffentlich bleibt oder ein Passwort bekommt.</li>
+    <li>MQTT, Zigbee2MQTT und Hue einbinden.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="padding:0">
+    <p><strong style="color:var(--paper)">Projektdokumentation Domus</strong><br>
+    Patrick Biber · <a href="https://biber.solar">biber.solar</a> · <a href="mailto:patrick@biber.solar">patrick@biber.solar</a></p>
+    <p>Code und ausführliche Doku im <a href="https://github.com/patbiber/domus" target="_blank" rel="nofollow noopener">GitHub-Repository patbiber/domus</a>. Gebaut mit Claude Code, das direkt auf dem NUC arbeitet.</p>
+  </div>
+</footer>
+
+</body>
+</html>
