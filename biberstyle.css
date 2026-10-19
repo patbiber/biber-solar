@@ -516,9 +516,9 @@ body::before{
   font-size: 0.9rem;
   color: var(--muted2);
 }
-/* #Domus: Handy-Screenshots nebeneinander, auf schmalen Bildschirmen 2 pro Reihe */
-.handy-reihe{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 18px 0; align-items: start; }
+/* #Domus: Handy-Screenshots der Retro-Seite, immer 2 pro Reihe (am Computer gut lesbar) */
+.handy-reihe{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 18px 0; align-items: start; max-width: 820px; }
 .handy-reihe figure{ margin: 0; }
 .handy-reihe img{ display: block; width: 100%; height: auto; border-radius: 18px; border: 3px solid #222; box-shadow: var(--shadow); background: #000; }
 .handy-reihe figcaption{ margin-top: 6px; font-size: .85rem; color: var(--muted); text-align: center; }
-@media (max-width: 700px){ .handy-reihe{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
+@media (max-width: 700px){ .handy-reihe{ gap: 10px; } }
