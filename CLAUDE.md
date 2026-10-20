@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is Patrick Biber's personal static website, deployed at [biber.solar](https://biber.solar). It's a playground for web-based tools and notes around renewable energy, solar/PV consulting, and Linux/IT — not a build-tooled application. There is no bundler. Content is primarily German (`lang="de"`).
 
-The site is hosted on an OVH VPS in Strasbourg (per the footer in `index.html`).
+The site is self-hosted (since 03.10.2026; no longer on OVH). The footer in `index.html` links only Impressum and Datenschutz (Patrick 20.10.2026: no hosting or repository note).
 
 ## Working with this repo
 
