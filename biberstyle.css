@@ -522,3 +522,9 @@ body::before{
 .handy-reihe img{ display: block; width: 100%; height: auto; border-radius: 18px; border: 3px solid #222; box-shadow: var(--shadow); background: #000; }
 .handy-reihe figcaption{ margin-top: 6px; font-size: .85rem; color: var(--muted); text-align: center; }
 @media (max-width: 700px){ .handy-reihe{ gap: 10px; } }
+
+/* Rechtsseiten (Impressum, Datenschutz): Zwischentitel und Listen gut lesbar */
+body.recht section strong{ color: var(--text); }
+body.recht section li{ color: var(--muted); }
+body.recht h1{ font-size: clamp(26px, 7vw, 40px); hyphens: auto; overflow-wrap: anywhere; }
+body.recht section{ background: rgba(11,13,15,0.94); }
