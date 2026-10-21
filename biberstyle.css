@@ -528,3 +528,19 @@ body.recht section strong{ color: var(--text); }
 body.recht section li{ color: var(--muted); }
 body.recht h1{ font-size: clamp(26px, 7vw, 40px); hyphens: auto; overflow-wrap: anywhere; }
 body.recht section{ background: rgba(11,13,15,0.94); }
+
+/* =========================================
+   Sprachumschalter oben rechts: Schweizer Wappen = Deutsch, Globus = English
+   ========================================= */
+header nav{ flex: 1; }
+.sprache{ display: flex; gap: 4px; flex: none; margin-left: 10px; }
+.sprache a{
+  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px;
+  color: var(--text); opacity: .55; border: 1px solid transparent; transition: opacity .2s, background-color .2s;
+}
+.sprache a:hover{ opacity: 1; text-decoration: none; }
+.sprache a.aktiv{ opacity: 1; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); }
+.sprache svg{ width: 20px; height: 20px; display: block; }
+@media (max-width: 700px){
+  nav{ order: 3; }          /* Menü klappt unter Hamburger und Umschalter auf */
+}

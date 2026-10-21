@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss geo address search</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        h2 { color: #333; }
+        input, button { padding: 10px; margin: 5px 0; font-size: 16px; }
+        input { width: 300px; }
+        button { background-color: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        .autocomplete-list { position: absolute; background: white; border: 1px solid #ccc; max-width: 300px; z-index: 1000; }
+        .autocomplete-list div { padding: 8px; cursor: pointer; }
+        .autocomplete-list div:hover { background-color: #ddd; }
+        .map-section { margin-top: 20px; padding: 10px; background: white; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        iframe { width: 100%; height: 500px; border: 0; display: none; }
+        a { display: block; margin-top: 5px; color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+    <script>
+        function wgs84ToLv95(lon, lat) {
+            let a = 6378137.0;
+            let f = 1 / 298.257223563;
+            let b = a * (1 - f);
+
+            let phi = lat * Math.PI / 180;
+            let lambda = lon * Math.PI / 180;
+
+            let phi0 = 46.952405555 * Math.PI / 180;
+            let lambda0 = 7.439583333 * Math.PI / 180;
+
+            let e2 = (a * a - b * b) / (a * a);
+            let n = (a - b) / (a + b);
+
+            let deltaLambda = lambda - lambda0;
+            let deltaPhi = phi - phi0;
+
+            let x = 2600000 + (deltaLambda * 100000) + (deltaPhi * 10000);
+            let y = 1200000 + (deltaPhi * 100000) - (deltaLambda * 10000);
+
+            return { x: Math.round(x), y: Math.round(y) };
+        }
+
+        function searchAddress() {
+            let address = document.getElementById("addressInput").value;
+            let apiUrl = `https://api3.geo.admin.ch/rest/services/api/SearchServer?searchText=${encodeURIComponent(address)}&type=locations&limit=1`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.results.length > 0) {
+                        let result = data.results[0];
+                        let lon = parseFloat(result.attrs.lon);
+                        let lat = parseFloat(result.attrs.lat);
+                        let lv95 = wgs84ToLv95(lon, lat);
+
+                        document.getElementById("coordinates").innerText = `Coordinates: X=${lv95.x}, Y=${lv95.y}`;
+
+                        let katasterURL = `https://geo.zh.ch/maps?x=${lv95.x}&y=${lv95.y}&scale=750&initialMapIds=KatasterplanZH`;
+                        let orthoURL = `https://geo.zh.ch/maps?x=${lv95.x}&y=${lv95.y}&scale=750&initialMapIds=Ortho22ZH`;
+                        let solarURL = `https://map.geo.admin.ch/?zoom=13&layers=ch.bfe.solarenergie-eignung-daecher&bgLayer=ch.swisstopo.swissimage&widgets=feedback&X=${lv95.x}&Y=${lv95.y}&lang=en`;
+
+                        document.getElementById("katasterLink").href = katasterURL;
+                        document.getElementById("photoLink").href = orthoURL;
+                        document.getElementById("solarLink").href = solarURL;
+
+                        document.getElementById("katasterFrame").src = katasterURL;
+                        document.getElementById("photoFrame").src = orthoURL;
+                        document.getElementById("solarFrame").src = solarURL;
+
+                        document.getElementById("katasterFrame").style.display = "block";
+                        document.getElementById("photoFrame").style.display = "block";
+                        document.getElementById("solarFrame").style.display = "block";
+                    } else {
+                        alert("Address not found! Please enter a valid address in Switzerland.");
+                    }
+                })
+                .catch(error => console.error("Address search failed:", error));
+        }
+
+        function autocompleteAddress() {
+            let input = document.getElementById("addressInput").value;
+            if (input.length < 3) return;
+
+            let apiUrl = `https://api3.geo.admin.ch/rest/services/api/SearchServer?searchText=${encodeURIComponent(input)}&type=locations&limit=5`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    let dropdown = document.getElementById("autocompleteList");
+                    dropdown.innerHTML = "";
+
+                    data.results.forEach(result => {
+                        let option = document.createElement("div");
+                        option.innerText = result.attrs.label;
+                        option.onclick = function() {
+                            document.getElementById("addressInput").value = result.attrs.label;
+                            dropdown.innerHTML = "";
+                            searchAddress();
+                        };
+                        dropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error("Autocomplete failed:", error));
+        }
+    </script>
+<script defer src="https://stats.biber.solar/s.js" data-website-id="5b9e7240-a5b9-4618-901c-621f2e5808fb" data-domains="biber.solar" data-do-not-track="true"></script>
+<link rel="alternate" hreflang="de" href="https://biber.solar/geo.html">
+<link rel="alternate" hreflang="en" href="https://biber.solar/en/geo.html">
+<link rel="alternate" hreflang="x-default" href="https://biber.solar/geo.html">
+<style>.sprache{display:flex;justify-content:flex-end;gap:4px;padding:8px 12px;background:#f4f4f4}.sprache a{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;opacity:.6;color:#333;border:1px solid transparent}.sprache a:hover{opacity:1}.sprache a.aktiv{opacity:1;background:rgba(128,128,128,.16);border-color:rgba(128,128,128,.35)}.sprache svg{width:20px;height:20px}</style>
+</head>
+<body>
+<div class="sprache" role="navigation" aria-label="Sprache / Language"><a href="../geo.html" hreflang="de" lang="de" title="Deutsch" aria-label="Deutsch"><svg viewBox="0 0 32 36" aria-hidden="true"><path d="M2 2h28v14c0 9-6 15-14 18C8 31 2 25 2 16z" fill="#d52b1e" stroke="#fff" stroke-width="1.5"/><path d="M13.5 8h5v6h6v5h-6v6h-5v-6h-6v-5h6z" fill="#fff"/></svg></a><a href="./geo.html" hreflang="en" lang="en" title="English" aria-label="English" class="aktiv" aria-current="true"><svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="16" cy="16" r="13"/><ellipse cx="16" cy="16" rx="6" ry="13"/><path d="M16 3v26M3 16h26M5 9.5h22M5 22.5h22"/></svg></a></div>
+    <h2>Swiss geo address search</h2>
+    <input type="text" id="addressInput" placeholder="Enter an address (e.g. Bahnhofstrasse 1, Zürich)" onkeyup="autocompleteAddress()">
+    <button onclick="searchAddress()">Search</button>
+    <div id="autocompleteList" class="autocomplete-list"></div>
+
+    <p id="coordinates">Coordinates: (no address selected yet)</p>
+
+    <div class="map-section">
+        <h3>Land registry map (Canton of Zurich)</h3>
+        <a id="katasterLink" href="#" target="_blank">Show land registry map</a>
+        <iframe id="katasterFrame"></iframe>
+    </div>
+
+    <div class="map-section">
+        <h3>Aerial photo (Canton of Zurich)</h3>
+        <a id="photoLink" href="#" target="_blank">Show aerial photo</a>
+        <iframe id="photoFrame"></iframe>
+    </div>
+
+    <div class="map-section">
+        <h3>Solar potential</h3>
+        <a id="solarLink" href="#" target="_blank">Show solar potential</a>
+        <iframe id="solarFrame"></iframe>
+    </div>
+</body>
+</html>
