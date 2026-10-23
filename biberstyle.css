@@ -486,7 +486,7 @@ body::before{
   inset: 0;
   z-index: -1;
 
-  background-image: url("Wheretogo.jpg"); /* Pfad anpassen */
+  background-image: url("strand-sonnenuntergang.webp"); /* Sonnenuntergang am Meer (Foto Patrick, 12.10.2026), ohne Kameradaten */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
