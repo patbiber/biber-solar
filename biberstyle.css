@@ -522,6 +522,9 @@ body::before{
 .handy-reihe img{ display: block; width: 100%; height: auto; border-radius: 18px; border: 3px solid #222; box-shadow: var(--shadow); background: #000; }
 .handy-reihe figcaption{ margin-top: 6px; font-size: .85rem; color: var(--muted); text-align: center; }
 @media (max-width: 700px){ .handy-reihe{ gap: 10px; } }
+.film-homi{ max-width: 420px; margin: 24px auto; }
+.film-homi video{ display: block; width: 100%; height: auto; border-radius: 18px; border: 3px solid #222; box-shadow: var(--shadow); background: #000; }
+.film-homi figcaption{ margin-top: 6px; font-size: .85rem; color: var(--muted); text-align: center; }
 
 /* Rechtsseiten (Impressum, Datenschutz): Zwischentitel und Listen gut lesbar */
 body.recht section strong{ color: var(--text); }
