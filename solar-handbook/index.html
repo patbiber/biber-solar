@@ -111,6 +111,19 @@
     overflow-x:auto;
     white-space:nowrap;
   }
+  .formula:has(+ .legend){margin-bottom:0;border-radius:4px 4px 0 0}
+  .legend{
+    list-style:none;
+    margin:0 0 1rem;
+    padding:.5rem .9rem .5rem 1.1rem;
+    border-left:4px solid var(--sun);
+    background:var(--card);
+    border-radius:0 0 4px 4px;
+    font-size:.9rem;
+    color:#5d5a52;
+  }
+  .legend li{margin:.15rem 0}
+  .legend b{font-family:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;color:var(--ink)}
   .callout{
     border:1px solid var(--line);
     border-left:5px solid var(--green);
@@ -257,8 +270,19 @@
   <h2><span class="num">02</span> Electricity basics</h2>
   <p>Three quantities describe every circuit: voltage <code>U</code> (volts), current <code>I</code> (amps) and resistance <code>R</code> (ohms).</p>
   <span class="formula">U = R × I &nbsp;&nbsp;·&nbsp;&nbsp; I = U / R &nbsp;&nbsp;·&nbsp;&nbsp; R = U / I</span>
+  <ul class="legend">
+    <li><b>U</b> – voltage, in volts [V]</li>
+    <li><b>I</b> – current, in amperes [A]</li>
+    <li><b>R</b> – resistance, in ohms [Ω]</li>
+  </ul>
   <p>Power <code>P</code> (watts) and energy <code>E</code> (watt-hours) are what customers pay for:</p>
   <span class="formula">P = U × I &nbsp;&nbsp;·&nbsp;&nbsp; E = P × t &nbsp;&nbsp;·&nbsp;&nbsp; 1 kWh = 1000 W for 1 hour</span>
+  <ul class="legend">
+    <li><b>P</b> – power, in watts [W]</li>
+    <li><b>E</b> – energy, in watt-hours [Wh] or kilowatt-hours [kWh]</li>
+    <li><b>U</b> – voltage [V] · <b>I</b> – current [A]</li>
+    <li><b>t</b> – time, in hours [h]</li>
+  </ul>
 
   <h3>Series and parallel</h3>
   <ul>
@@ -349,22 +373,48 @@
   <h3>Step 1 — Daily energy need</h3>
   <p>List every load: power (W) × hours per day = watt-hours (Wh). Add them up.</p>
   <span class="formula">E_daily [Wh] = Σ ( P_load × hours )</span>
+  <ul class="legend">
+    <li><b>E_daily</b> – energy needed per day, in watt-hours [Wh]</li>
+    <li><b>Σ</b> – sum: add up the result for every load</li>
+    <li><b>P_load</b> – power of one load (appliance), in watts [W]</li>
+    <li><b>hours</b> – hours per day the load runs [h]</li>
+  </ul>
   <p>Example: 4 LED lamps 10 W × 5 h = 200 Wh · TV 60 W × 4 h = 240 Wh · fridge ≈ 800 Wh · phone charging 30 Wh → <strong>≈ 1270 Wh/day</strong>.</p>
 
   <h3>Step 2 — Solar array</h3>
   <span class="formula">P_array [Wp] = E_daily / ( PSH × PR )</span>
-  <p><code>PR</code> is the performance ratio: use <strong>0.70</strong> for battery systems (heat, dust, cable, charging and inverter losses), 0.75–0.80 for grid-tied.</p>
+  <ul class="legend">
+    <li><b>P_array</b> – power of the solar array, in watt-peak [Wp] (power at standard test conditions: 1000 W/m², 25 °C)</li>
+    <li><b>E_daily</b> – energy needed per day [Wh] (step 1)</li>
+    <li><b>PSH</b> – peak sun hours per day [h]; 1 PSH = 1000 W/m² of sunshine during one hour</li>
+    <li><b>PR</b> – performance ratio: share of the rated power that really arrives – use <strong>0.70</strong> for battery systems (heat, dust, cable, charging and inverter losses), 0.75–0.80 for grid-tied</li>
+  </ul>
 
   <h3>Step 3 — Battery bank</h3>
   <span class="formula">C [Ah] = ( E_daily × days of autonomy ) / ( U_battery × DoD × η )</span>
-  <p>Days of autonomy: 1–2 for hybrid with grid backup, 2–3 for full off-grid. DoD: 0.8 for lithium, 0.5 for lead-acid. η (battery + inverter efficiency): ≈ 0.85.</p>
+  <ul class="legend">
+    <li><b>C</b> – battery capacity, in ampere-hours [Ah]</li>
+    <li><b>E_daily</b> – energy needed per day [Wh]</li>
+    <li><b>days of autonomy</b> – days the battery must supply the loads without sun: 1–2 for hybrid with grid backup, 2–3 for full off-grid</li>
+    <li><b>U_battery</b> – nominal battery voltage [V], e.g. 12, 24 or 48 V</li>
+    <li><b>DoD</b> – depth of discharge: share of the capacity you may use – 0.8 for lithium, 0.5 for lead-acid</li>
+    <li><b>η</b> (eta) – efficiency of battery and inverter, ≈ 0.85</li>
+  </ul>
 
   <h3>Step 4 — Inverter</h3>
   <p>Inverter power ≥ the sum of loads that run at the same time, plus reserve for motor start-up (fridges and pumps need 3–5 × their rated power for a moment). Choose a pure sine wave inverter.</p>
 
   <h3>Step 5 — Cables</h3>
   <span class="formula">A [mm²] = ( 2 × L × I ) / ( 56 × ΔU )</span>
-  <p><code>L</code> = one-way cable length in m, <code>I</code> = current in A, <code>ΔU</code> = allowed voltage drop in volts (aim for max. 3 % on the battery side — that is only 0.36 V in a 12 V system!). 56 is the conductivity of copper. Low-voltage battery systems need <strong>thick cables</strong>.</p>
+  <ul class="legend">
+    <li><b>A</b> – cross-section of the cable, in square millimetres [mm²]</li>
+    <li><b>2</b> – the current flows out and back, so the length counts twice</li>
+    <li><b>L</b> – one-way cable length, in metres [m]</li>
+    <li><b>I</b> – current [A]</li>
+    <li><b>56</b> – conductivity of copper, 56 m/(Ω·mm²)</li>
+    <li><b>ΔU</b> (delta U) – allowed voltage drop, in volts [V]: aim for max. 3 % on the battery side — that is only 0.36 V in a 12 V system!</li>
+  </ul>
+  <p>Low-voltage battery systems need <strong>thick cables</strong>.</p>
 
   <div class="calc" id="calculator">
     <h3>⚡ System sizing calculator</h3>
@@ -476,6 +526,14 @@
     <tr><td>Cable size</td><td><code>mm² = 2 × L × I ÷ (56 × ΔU)</code></td></tr>
     <tr><td>Max. string voltage</td><td><code>U = Uoc × n × 1.02</code> (cool mornings raise Uoc — stay below the inverter/controller limit)</td></tr>
   </table>
+  <ul class="legend">
+    <li><b>P</b> – power [W] · <b>U</b>, <b>V</b> – voltage [V] · <b>I</b> – current [A] · <b>E</b> – energy [Wh] · <b>t</b> – time [h]</li>
+    <li><b>Wp</b> – watt-peak, power of the solar array · <b>Wh/day</b> – energy needed per day · <b>Ah</b> – battery capacity in ampere-hours</li>
+    <li><b>PSH</b> – peak sun hours per day · <b>0.7</b> – performance ratio for battery systems</li>
+    <li><b>days</b> – days of autonomy · <b>DoD</b> – depth of discharge (0.8 lithium, 0.5 lead-acid) · <b>0.85</b> – efficiency of battery and inverter</li>
+    <li><b>mm²</b> – cable cross-section · <b>L</b> – one-way length [m] · <b>56</b> – conductivity of copper · <b>ΔU</b> – allowed voltage drop [V]</li>
+    <li><b>Uoc</b> – open-circuit voltage of one module (oc = open circuit, from the datasheet) · <b>n</b> – modules in series · <b>1.02</b> – about +2 % for cool mornings; on colder sites calculate with the temperature coefficient of the module</li>
+  </ul>
 
   <h3>Typical loads</h3>
   <table>
